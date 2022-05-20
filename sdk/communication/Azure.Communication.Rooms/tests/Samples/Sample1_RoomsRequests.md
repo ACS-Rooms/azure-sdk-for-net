@@ -21,7 +21,7 @@ To create a new  ACS room, call the `CreateRoom` or `CreateRoomAsync` function f
 
 ```C# Snippet:Azure_Communication_Rooms_Tests_Samples_CreateRoomAsync - Creating a room with Participants
 RoomRequest request = new RoomRequest();
-Response<RoomModel> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, participants);
+Response<RoomModel> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, participants);
 RoomModel createCommunicationRoom = createRoomResponse.Value;
 ```
 
@@ -31,12 +31,22 @@ Response<RoomModel> createRoomResponse = await roomsClient.CreateRoomAsync(valid
 RoomModel createCommunicationRoom = createRoomResponse.Value;
 ```
 
+## Create a new open room
+
+To create a new  ACS open room, call the `CreateRoom` or `CreateRoomAsync` function from the RoomsClient with the roomJoinPolicy set to CommunicationServiceUsersValue. The returned value is `RoomResult` objects that contains the status and associated error codes in case of a failure.
+
+```C# Snippet:Azure_Communication_Rooms_Tests_Samples_CreateOpenRoomAsync
+RoomRequest request = new RoomRequest();
+Response<RoomModel> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.CommunicationServiceUsersValue);
+RoomModel createCommunicationRoom = createRoomResponse.Value;
+```
+
 ## Update an existing room
 
 To update an existing ACS room, call the `UpdateRoom` or `UpdateRoomAsync` function from the RoomsClient. The returned value is `RoomModel` objects that contains the status and associated error codes in case of a failure.
 
 ```C# Snippet:Azure_Communication_Rooms_Tests_Samples_UpdateRoomAsync - update a room's valid from, valid until and participants
-Response<RoomModel> updateRoomResponse = await roomsClient.UpdateRoomAsync(createdRoomId, validFrom, validUntil, participants);
+Response<RoomModel> updateRoomResponse = await roomsClient.UpdateRoomAsync(createdRoomId, validFrom, validUntil, RoomJoinPolicy.InviteOnly, participants);
 RoomModel updateCommunicationRoom = updateRoomResponse.Value;
 ```
 ```C# Snippet:Azure_Communication_Rooms_Tests_Samples_UpdateRoomAsync - update a room's valid from, valid until

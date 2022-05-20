@@ -26,13 +26,15 @@ namespace Azure.Communication.Rooms
         /// <param name="createdDateTime"> The timestamp when the room was created at the server. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`. </param>
         /// <param name="validFrom"> The timestamp from when the room is open for joining. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`. </param>
         /// <param name="validUntil"> The timestamp from when the room can no longer be joined. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`. </param>
+        /// <param name="roomJoinPolicy"> The room join policy for the room. </param>
         /// <param name="participants"> Collection of identities invited to the room. </param>
-        internal RoomModel(string id, DateTimeOffset? createdDateTime, DateTimeOffset? validFrom, DateTimeOffset? validUntil, IReadOnlyList<RoomParticipant> participants)
+        internal RoomModel(string id, DateTimeOffset? createdDateTime, DateTimeOffset? validFrom, DateTimeOffset? validUntil, RoomJoinPolicy? roomJoinPolicy, IReadOnlyList<RoomParticipant> participants)
         {
             Id = id;
             CreatedDateTime = createdDateTime;
             ValidFrom = validFrom;
             ValidUntil = validUntil;
+            RoomJoinPolicy = roomJoinPolicy;
             Participants = participants;
         }
 
@@ -42,6 +44,7 @@ namespace Azure.Communication.Rooms
             CreatedDateTime = roomModelInternal.CreatedDateTime;
             ValidFrom = roomModelInternal.ValidFrom;
             ValidUntil = roomModelInternal.ValidUntil;
+            RoomJoinPolicy = roomModelInternal.RoomJoinPolicy;
             //Participants = (IReadOnlyList<RoomParticipant>)roomModelInternal.Participants;
             Participants = RoomParticipantsInternalToRoomParticipants(roomModelInternal.Participants);
         }
@@ -65,6 +68,8 @@ namespace Azure.Communication.Rooms
         public DateTimeOffset? ValidFrom { get; }
         /// <summary> The timestamp from when the room can no longer be joined. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`. </summary>
         public DateTimeOffset? ValidUntil { get; }
+        /// <summary> The room join policy for the room. </summary>
+        public RoomJoinPolicy? RoomJoinPolicy { get; }
         /// <summary> Collection of identities invited to the room. </summary>
         public IReadOnlyList<RoomParticipant> Participants { get; }
     }

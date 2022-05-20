@@ -16,7 +16,7 @@ namespace Azure.Communication.Rooms
         }
 
         /// <summary> Initializes a new instance of CommunicationIdentifierModel. </summary>
-        /// <param name="rawId"> Raw Id of the identifier. Optional in requests, required in responses. </param>
+        /// <param name="rawId"> Raw id of the identifier. Optional in requests, required in responses. </param>
         /// <param name="communicationUser"> A user that got created with an Azure Communication Services resource. </param>
         internal CommunicationIdentifierModel(string rawId, CommunicationUserIdentifierModel communicationUser)
         {
@@ -24,7 +24,7 @@ namespace Azure.Communication.Rooms
             CommunicationUser = communicationUser;
         }
 
-        /// <summary> Raw Id of the identifier. Optional in requests, required in responses. </summary>
+        /// <summary> Raw id of the identifier. Optional in requests, required in responses. </summary>
         public string RawId { get; set; }
         /// <summary> A user that got created with an Azure Communication Services resource. </summary>
         public CommunicationUserIdentifierModel CommunicationUser { get; set; }
