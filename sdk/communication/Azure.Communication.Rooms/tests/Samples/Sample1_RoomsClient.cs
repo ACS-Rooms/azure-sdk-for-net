@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure.Communication.Identity;
-using Azure.Communication.Rooms.Models;
+using Azure.Communication.Rooms;
 using Azure.Core.TestFramework;
 using NUnit.Framework;
 

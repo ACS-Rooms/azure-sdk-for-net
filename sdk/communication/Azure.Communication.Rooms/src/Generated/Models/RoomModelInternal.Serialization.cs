@@ -10,17 +10,17 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace Azure.Communication.Rooms.Models
+namespace Azure.Communication.Rooms
 {
-    internal partial class RoomModel
+    internal partial class RoomModelInternal
     {
-        internal static RoomModel DeserializeRoomModel(JsonElement element)
+        internal static RoomModelInternal DeserializeRoomModelInternal(JsonElement element)
         {
             Optional<string> id = default;
             Optional<DateTimeOffset> createdDateTime = default;
             Optional<DateTimeOffset> validFrom = default;
             Optional<DateTimeOffset> validUntil = default;
-            Optional<IReadOnlyDictionary<string, RoomParticipantInternal>> participants = default;
+            Optional<IReadOnlyList<RoomParticipantInternal>> participants = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -65,16 +65,16 @@ namespace Azure.Communication.Rooms.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    Dictionary<string, RoomParticipantInternal> dictionary = new Dictionary<string, RoomParticipantInternal>();
-                    foreach (var property0 in property.Value.EnumerateObject())
+                    List<RoomParticipantInternal> array = new List<RoomParticipantInternal>();
+                    foreach (var item in property.Value.EnumerateArray())
                     {
-                        dictionary.Add(property0.Name, RoomParticipantInternal.DeserializeRoomParticipantInternal(property0.Value));
+                        array.Add(RoomParticipantInternal.DeserializeRoomParticipantInternal(item));
                     }
-                    participants = dictionary;
+                    participants = array;
                     continue;
                 }
             }
-            return new RoomModel(id.Value, Optional.ToNullable(createdDateTime), Optional.ToNullable(validFrom), Optional.ToNullable(validUntil), Optional.ToDictionary(participants));
+            return new RoomModelInternal(id.Value, Optional.ToNullable(createdDateTime), Optional.ToNullable(validFrom), Optional.ToNullable(validUntil), Optional.ToList(participants));
         }
     }
 }
