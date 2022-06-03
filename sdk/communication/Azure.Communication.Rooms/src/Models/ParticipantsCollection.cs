@@ -34,7 +34,20 @@ namespace Azure.Communication.Rooms
                 throw new ArgumentNullException(nameof(participants));
             }
 
-            Participants = (IReadOnlyList<RoomParticipant>)participants.ToList();
+            Participants = RoomParticipantsInternalToRoomParticipants(participants);
+
+        }
+
+        internal IReadOnlyList<RoomParticipant> RoomParticipantsInternalToRoomParticipants(IEnumerable<RoomParticipantInternal> roomParticipantsInternal)
+        {
+            List<RoomParticipant> roomParticipants = new List<RoomParticipant>();
+            foreach (RoomParticipantInternal eachRoomParticipantInternal in roomParticipantsInternal)
+            {
+                RoomParticipant roomParticipant = new RoomParticipant(eachRoomParticipantInternal);
+                roomParticipants.Add(roomParticipant);
+            }
+
+            return roomParticipants;
         }
 
         /// <summary> Initializes a new instance of ParticipantsCollection. </summary>

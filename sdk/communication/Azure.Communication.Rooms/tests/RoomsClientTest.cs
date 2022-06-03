@@ -37,12 +37,12 @@ namespace Azure.Communication.Rooms.Tests
             CancellationToken cancellationToken = new CancellationTokenSource().Token;
 
             mockRoomsClient
-                .Setup(roomsClient => roomsClient.CreateRoomAsync(createRoomParticipants, validFrom, validUntil, cancellationToken))
+                .Setup(roomsClient => roomsClient.CreateRoomAsync(validFrom, validUntil, createRoomParticipants, cancellationToken))
                 .ReturnsAsync(expectedRoomResult);
 
-            Response<RoomModel> actualResponse = await mockRoomsClient.Object.CreateRoomAsync(createRoomParticipants, validFrom, validUntil, cancellationToken);
+            Response<RoomModel> actualResponse = await mockRoomsClient.Object.CreateRoomAsync(validFrom, validUntil, createRoomParticipants, cancellationToken);
 
-            mockRoomsClient.Verify(roomsClient => roomsClient.CreateRoomAsync(createRoomParticipants, validFrom, validUntil, cancellationToken), Times.Once());
+            mockRoomsClient.Verify(roomsClient => roomsClient.CreateRoomAsync(validFrom, validUntil, createRoomParticipants, cancellationToken), Times.Once());
             Assert.AreEqual(expectedRoomResult, actualResponse);
         }
 
@@ -50,7 +50,7 @@ namespace Azure.Communication.Rooms.Tests
         public void CreateRoomShouldSucceed()
         {
             Mock<RoomsClient> mockRoomsClient = new Mock<RoomsClient>();
-            var validFrom = new DateTime(2022, 05, 01, 00, 00, 00, DateTimeKind.Utc);
+            var validFrom = new DateTime(2022, 07, 01, 00, 00, 00, DateTimeKind.Utc);
             var validUntil = validFrom.AddDays(1);
             List<RoomParticipant> createRoomParticipants = new List<RoomParticipant>();
             string communicationUser1 = "mockAcsUserIdentityString1";
@@ -62,12 +62,12 @@ namespace Azure.Communication.Rooms.Tests
             CancellationToken cancellationToken = new CancellationTokenSource().Token;
 
             mockRoomsClient
-                .Setup(roomsClient => roomsClient.CreateRoom(createRoomParticipants, validFrom, validUntil, cancellationToken))
+                .Setup(roomsClient => roomsClient.CreateRoom(validFrom, validUntil, createRoomParticipants, cancellationToken))
                 .Returns(expectedRoomResult);
 
-            Response<RoomModel> actualResponse = mockRoomsClient.Object.CreateRoom(createRoomParticipants, validFrom, validUntil, cancellationToken);
+            Response<RoomModel> actualResponse = mockRoomsClient.Object.CreateRoom(validFrom, validUntil, createRoomParticipants, cancellationToken);
 
-            mockRoomsClient.Verify(roomsClient => roomsClient.CreateRoom(createRoomParticipants, validFrom, validUntil, cancellationToken), Times.Once());
+            mockRoomsClient.Verify(roomsClient => roomsClient.CreateRoom(validFrom, validUntil, createRoomParticipants, cancellationToken), Times.Once());
             Assert.AreEqual(expectedRoomResult, actualResponse);
         }
 
@@ -82,12 +82,12 @@ namespace Azure.Communication.Rooms.Tests
             CancellationToken cancellationToken = new CancellationTokenSource().Token;
 
             mockRoomsClient
-            .Setup(roomsClient => roomsClient.UpdateRoomAsync(roomId, default, validFrom, validUntil, cancellationToken))
+            .Setup(roomsClient => roomsClient.UpdateRoomAsync(roomId, validFrom, validUntil, default, cancellationToken))
             .ReturnsAsync(expectedRoomResult);
 
-            Response<RoomModel> actualResponse = await mockRoomsClient.Object.UpdateRoomAsync(roomId, default, validFrom, validUntil, cancellationToken);
+            Response<RoomModel> actualResponse = await mockRoomsClient.Object.UpdateRoomAsync(roomId, validFrom, validUntil, default, cancellationToken);
 
-            mockRoomsClient.Verify(roomsClient => roomsClient.UpdateRoomAsync(roomId, default, validFrom, validUntil, cancellationToken), Times.Once());
+            mockRoomsClient.Verify(roomsClient => roomsClient.UpdateRoomAsync(roomId, validFrom, validUntil, default, cancellationToken), Times.Once());
             Assert.AreEqual(expectedRoomResult, actualResponse);
         }
 
@@ -103,12 +103,12 @@ namespace Azure.Communication.Rooms.Tests
             CancellationToken cancellationToken = new CancellationTokenSource().Token;
 
             mockRoomsClient
-            .Setup(roomsClient => roomsClient.UpdateRoom(roomId, default, validFrom, validUntil, cancellationToken))
+            .Setup(roomsClient => roomsClient.UpdateRoom(roomId, validFrom, validUntil, default, cancellationToken))
             .Returns(expectedRoomResult);
 
-            Response<RoomModel> actualResponse = mockRoomsClient.Object.UpdateRoom(roomId, default, validFrom, validUntil, cancellationToken);
+            Response<RoomModel> actualResponse = mockRoomsClient.Object.UpdateRoom(roomId, validFrom, validUntil, default, cancellationToken);
 
-            mockRoomsClient.Verify(roomsClient => roomsClient.UpdateRoom(roomId, default, validFrom, validUntil, cancellationToken), Times.Once());
+            mockRoomsClient.Verify(roomsClient => roomsClient.UpdateRoom(roomId, validFrom, validUntil, default, cancellationToken), Times.Once());
             Assert.AreEqual(expectedRoomResult, actualResponse);
         }
 

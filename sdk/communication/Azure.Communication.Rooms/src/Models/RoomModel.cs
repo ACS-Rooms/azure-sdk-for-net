@@ -42,9 +42,21 @@ namespace Azure.Communication.Rooms
             CreatedDateTime = roomModelInternal.CreatedDateTime;
             ValidFrom = roomModelInternal.ValidFrom;
             ValidUntil = roomModelInternal.ValidUntil;
-            Participants = (IReadOnlyList<RoomParticipant>)roomModelInternal.Participants;
+            //Participants = (IReadOnlyList<RoomParticipant>)roomModelInternal.Participants;
+            Participants = RoomParticipantsInternalToRoomParticipants(roomModelInternal.Participants);
         }
 
+        internal IReadOnlyList<RoomParticipant> RoomParticipantsInternalToRoomParticipants(IReadOnlyList<RoomParticipantInternal> roomParticipantsInternal)
+        {
+            List<RoomParticipant> roomParticipants = new List<RoomParticipant>();
+            foreach(RoomParticipantInternal eachRoomParticipantInternal in roomParticipantsInternal)
+            {
+                RoomParticipant roomParticipant = new RoomParticipant(eachRoomParticipantInternal);
+                roomParticipants.Add(roomParticipant);
+            }
+
+            return roomParticipants;
+        }
         /// <summary> Unique identifier of a room. This id is server generated. </summary>
         public string Id { get; }
         /// <summary> The timestamp when the room was created at the server. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`. </summary>
