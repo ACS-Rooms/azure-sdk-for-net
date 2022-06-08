@@ -199,7 +199,7 @@ namespace Azure.Communication.Rooms
             try
             {
                 Response<RoomModelInternal> updateRoomResponseInternal =
-                    RoomsServiceClient.UpdateRoom(roomId, validFrom, validUntil, participants.Select(x => x.ToRoomParticipantInternal()), cancellationToken);
+                    RoomsServiceClient.UpdateRoom(roomId, validFrom, validUntil, participants == null ? null : participants.Select(x => x.ToRoomParticipantInternal()), cancellationToken);
                 return Response.FromValue(new RoomModel(updateRoomResponseInternal.Value), updateRoomResponseInternal.GetRawResponse());
             }
             catch (Exception ex)
