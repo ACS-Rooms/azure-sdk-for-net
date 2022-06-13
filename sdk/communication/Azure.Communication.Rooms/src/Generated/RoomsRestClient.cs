@@ -517,7 +517,7 @@ namespace Azure.Communication.Rooms
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/room/", false);
+            uri.AppendPath("/rooms/", false);
             uri.AppendPath(roomId, true);
             uri.AppendPath("/participants:update", false);
             uri.AppendQuery("api-version", _apiVersion, true);

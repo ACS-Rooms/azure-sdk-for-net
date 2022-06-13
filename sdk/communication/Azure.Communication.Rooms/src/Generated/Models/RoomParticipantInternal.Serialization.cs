@@ -27,13 +27,13 @@ namespace Azure.Communication.Rooms
 
         internal static RoomParticipantInternal DeserializeRoomParticipantInternal(JsonElement element)
         {
-            CommunicationIdentifier communicationIdentifier = default;
+            CommunicationIdentifierModel communicationIdentifier = default;
             Optional<string> role = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("communicationIdentifier"))
                 {
-                    communicationIdentifier = CommunicationIdentifier.DeserializeCommunicationIdentifier(property.Value);
+                    communicationIdentifier = CommunicationIdentifierModel.DeserializeCommunicationIdentifierModel(property.Value);
                     continue;
                 }
                 if (property.NameEquals("role"))

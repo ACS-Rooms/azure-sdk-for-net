@@ -311,7 +311,7 @@ namespace Azure.Communication.Rooms
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         public virtual async Task<Response<ParticipantsCollection>> GetParticipantsAsync(string roomId, CancellationToken cancellationToken = default)
         {
-            using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(RoomsClient)}.{nameof(GetRoom)}");
+            using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(RoomsClient)}.{nameof(GetParticipants)}");
             scope.Start();
             try
             {
@@ -334,7 +334,7 @@ namespace Azure.Communication.Rooms
         /// <exception cref="ArgumentNullException"> <paramref name="roomId"/> is null. </exception>
         public virtual Response<ParticipantsCollection> GetParticipants(string roomId, CancellationToken cancellationToken = default)
         {
-            using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(RoomsClient)}.{nameof(GetRoom)}");
+            using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(RoomsClient)}.{nameof(GetParticipants)}");
             scope.Start();
             try
             {
@@ -350,7 +350,7 @@ namespace Azure.Communication.Rooms
         }
 
         /// <summary>
-        /// Add Participants to a Room
+        /// Add Participants to a Room asynchronously
         /// </summary>
         /// <param name="roomId"></param>
         /// <param name="participants"></param>
@@ -375,7 +375,7 @@ namespace Azure.Communication.Rooms
         }
 
         /// <summary>
-        /// Add Participants to a Room asynchronously
+        /// Add Participants to a Room
         /// </summary>
         /// <param name="roomId"></param>
         /// <param name="participants"></param>
@@ -399,7 +399,7 @@ namespace Azure.Communication.Rooms
         }
 
         /// <summary>
-        /// Update Participants in a Room
+        /// Update Participants in a Room asynchronously
         /// </summary>
         /// <param name="roomId"></param>
         /// <param name="participants"></param>
@@ -424,7 +424,7 @@ namespace Azure.Communication.Rooms
         }
 
         /// <summary>
-        /// Update Participants in a Room asynchronously
+        /// Update Participants in a Room
         /// </summary>
         /// <param name="roomId"></param>
         /// <param name="participants"></param>
@@ -472,7 +472,7 @@ namespace Azure.Communication.Rooms
         }
 
         /// <summary>
-        /// Remove Participants from a Room asynchronously
+        /// Remove Participants from a Room
         /// </summary>
         /// <param name="roomId"></param>
         /// <param name="participants"></param>

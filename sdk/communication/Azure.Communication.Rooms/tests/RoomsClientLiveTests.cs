@@ -272,7 +272,7 @@ namespace Azure.Communication.Rooms.Tests
 
                 // Get Room Participants
                 Response<ParticipantsCollection> getParticipantsResponse = await roomsClient.GetParticipantsAsync(createdRoomId);
-                Assert.AreEqual(getParticipantsResponse.Value.Participants.ToList().Count, updateParticipantsRoom.Id);
+                Assert.AreEqual(getParticipantsResponse.Value.Participants.ToList().Count, 2);
 
                 // Delete room
                 Response deleteRoomResponse = await roomsClient.DeleteRoomAsync(createdRoomId);

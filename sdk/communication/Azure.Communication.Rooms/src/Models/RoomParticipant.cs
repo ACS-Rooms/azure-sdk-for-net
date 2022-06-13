@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using Azure.Communication.Rooms.Models;
 
 namespace Azure.Communication.Rooms
 {

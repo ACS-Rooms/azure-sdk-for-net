@@ -1,18 +1,18 @@
 {
   "Entries": [
     {
-      "RequestUri": "https://jolovcommunication-communication.communication.azure.com/teamsUser/:exchangeAccessToken?api-version=2021-10-31-preview",
+      "RequestUri": "https://rooms-ppe-us.ppe.communication.azure.net/teamsUser/:exchangeAccessToken?api-version=2021-10-31-preview",
       "RequestMethod": "POST",
       "RequestHeaders": {
         "Accept": "application/json",
         "Authorization": "Sanitized",
         "Content-Length": "12",
         "Content-Type": "application/json",
-        "traceparent": "00-545ef5aa4572df58b9aea2210509fe00-8259276d29becf0c-00",
-        "User-Agent": "azsdk-net-Communication.Identity/1.1.0-alpha.20211206.1 (.NET 6.0.0-rtm.21522.10; Microsoft Windows 10.0.22000)",
-        "x-ms-client-request-id": "71977195ca7bc375087f0ee115bfc7ed",
+        "traceparent": "00-49e80969483aba418dd3dee335037e41-c893c3663abfaa48-00",
+        "User-Agent": "azsdk-net-Communication.Identity/1.1.0-alpha.20220613.1 (.NET Core 3.1.25; Microsoft Windows 10.0.19044)",
+        "x-ms-client-request-id": "61a9a04fe08d19f9cd5b17fe676fe2fe",
         "x-ms-content-sha256": "Sanitized",
-        "x-ms-date": "Tue, 07 Dec 2021 03:48:38 GMT",
+        "x-ms-date": "Mon, 13 Jun 2022 15:27:12 GMT",
         "x-ms-return-client-request-id": "true"
       },
       "RequestBody": {
@@ -21,15 +21,15 @@
       "StatusCode": 401,
       "ResponseHeaders": {
         "Content-Type": "application/json",
-        "Date": "Tue, 07 Dec 2021 03:48:37 GMT",
-        "MS-CV": "jQFhG1SL7ky0W2NMXfubTA.0",
+        "Date": "Mon, 13 Jun 2022 15:27:12 GMT",
+        "MS-CV": "fxSJnj0Gf0WdrFV2HImdRw.0",
         "Request-Context": "appId=",
         "Strict-Transport-Security": "max-age=2592000",
         "Transfer-Encoding": "chunked",
-        "X-Azure-Ref": "0ltmuYQAAAADz/n3wMsusTZkmy91J3TA6V1NURURHRTA4MjAAOWZjN2I1MTktYThjYy00Zjg5LTkzNWUtYzkxNDhhZTA5ZTgx",
+        "X-Azure-Ref": "0UFenYgAAAADjdf1DyfVvS7\u002B4ISE4ibCdS1VMMzBFREdFMDcxNABmMDlhNGMxMy0yMWYxLTQ4ZWMtOWNmNy02NjU0NTY4NGI2NDI=",
         "X-Cache": "CONFIG_NOCACHE",
-        "x-ms-client-request-id": "71977195ca7bc375087f0ee115bfc7ed",
-        "X-Processing-Time": "17ms"
+        "x-ms-client-request-id": "61a9a04fe08d19f9cd5b17fe676fe2fe",
+        "X-Processing-Time": "158ms"
       },
       "ResponseBody": {
         "error": {
@@ -40,7 +40,7 @@
     }
   ],
   "Variables": {
-    "COMMUNICATION_LIVETEST_DYNAMIC_CONNECTION_STRING": "endpoint=https://jolovcommunication-communication.communication.azure.com/;accesskey=Kg==",
-    "RandomSeed": "1069111752"
+    "COMMUNICATION_LIVETEST_DYNAMIC_CONNECTION_STRING": "endpoint=https://rooms-ppe-us.ppe.communication.azure.net/;accesskey=Kg==",
+    "RandomSeed": "1368874245"
   }
 }

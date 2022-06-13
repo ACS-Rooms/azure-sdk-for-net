@@ -8,9 +8,9 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace Azure.Communication
+namespace Azure.Communication.Rooms
 {
-    internal partial class CommunicationUserIdentifierModel : IUtf8JsonSerializable
+    public partial class CommunicationUserIdentifierModel : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

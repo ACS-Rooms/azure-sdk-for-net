@@ -5,22 +5,20 @@
 
 #nullable disable
 
-using Azure.Communication;
-
 namespace Azure.Communication.Rooms
 {
-    /// <summary> Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. </summary>
-    public partial class CommunicationIdentifier
+    /// <summary> Identifies a participant in Azure Communication services. A participant is, for example, an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. </summary>
+    public partial class CommunicationIdentifierModel
     {
-        /// <summary> Initializes a new instance of CommunicationIdentifier. </summary>
-        public CommunicationIdentifier()
+        /// <summary> Initializes a new instance of CommunicationIdentifierModel. </summary>
+        public CommunicationIdentifierModel()
         {
         }
 
-        /// <summary> Initializes a new instance of CommunicationIdentifier. </summary>
+        /// <summary> Initializes a new instance of CommunicationIdentifierModel. </summary>
         /// <param name="rawId"> Raw Id of the identifier. Optional in requests, required in responses. </param>
         /// <param name="communicationUser"> A user that got created with an Azure Communication Services resource. </param>
-        internal CommunicationIdentifier(string rawId, CommunicationUserIdentifierModel communicationUser)
+        internal CommunicationIdentifierModel(string rawId, CommunicationUserIdentifierModel communicationUser)
         {
             RawId = rawId;
             CommunicationUser = communicationUser;

@@ -6,12 +6,11 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Communication;
 using Azure.Core;
 
 namespace Azure.Communication.Rooms
 {
-    public partial class CommunicationIdentifier : IUtf8JsonSerializable
+    public partial class CommunicationIdentifierModel : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -29,7 +28,7 @@ namespace Azure.Communication.Rooms
             writer.WriteEndObject();
         }
 
-        internal static CommunicationIdentifier DeserializeCommunicationIdentifier(JsonElement element)
+        internal static CommunicationIdentifierModel DeserializeCommunicationIdentifierModel(JsonElement element)
         {
             Optional<string> rawId = default;
             Optional<CommunicationUserIdentifierModel> communicationUser = default;
@@ -51,7 +50,7 @@ namespace Azure.Communication.Rooms
                     continue;
                 }
             }
-            return new CommunicationIdentifier(rawId.Value, communicationUser.Value);
+            return new CommunicationIdentifierModel(rawId.Value, communicationUser.Value);
         }
     }
 }

@@ -7,10 +7,10 @@
 
 using System;
 
-namespace Azure.Communication
+namespace Azure.Communication.Rooms
 {
     /// <summary> A user that got created with an Azure Communication Services resource. </summary>
-    internal partial class CommunicationUserIdentifierModel
+    public partial class CommunicationUserIdentifierModel
     {
         /// <summary> Initializes a new instance of CommunicationUserIdentifierModel. </summary>
         /// <param name="id"> The Id of the communication user. </param>
