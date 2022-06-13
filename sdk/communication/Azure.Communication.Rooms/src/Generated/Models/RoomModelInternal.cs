@@ -25,13 +25,15 @@ namespace Azure.Communication.Rooms
         /// <param name="createdDateTime"> The timestamp when the room was created at the server. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`. </param>
         /// <param name="validFrom"> The timestamp from when the room is open for joining. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`. </param>
         /// <param name="validUntil"> The timestamp from when the room can no longer be joined. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`. </param>
+        /// <param name="roomOpen"> Flag to specify if the room is to be an open room or closed room. </param>
         /// <param name="participants"> Collection of identities invited to the room. </param>
-        internal RoomModelInternal(string id, DateTimeOffset? createdDateTime, DateTimeOffset? validFrom, DateTimeOffset? validUntil, IReadOnlyList<RoomParticipantInternal> participants)
+        internal RoomModelInternal(string id, DateTimeOffset? createdDateTime, DateTimeOffset? validFrom, DateTimeOffset? validUntil, bool? roomOpen, IReadOnlyList<RoomParticipantInternal> participants)
         {
             Id = id;
             CreatedDateTime = createdDateTime;
             ValidFrom = validFrom;
             ValidUntil = validUntil;
+            RoomOpen = roomOpen;
             Participants = participants;
         }
 
@@ -43,6 +45,8 @@ namespace Azure.Communication.Rooms
         public DateTimeOffset? ValidFrom { get; }
         /// <summary> The timestamp from when the room can no longer be joined. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`. </summary>
         public DateTimeOffset? ValidUntil { get; }
+        /// <summary> Flag to specify if the room is to be an open room or closed room. </summary>
+        public bool? RoomOpen { get; }
         /// <summary> Collection of identities invited to the room. </summary>
         public IReadOnlyList<RoomParticipantInternal> Participants { get; }
     }

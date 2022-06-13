@@ -24,6 +24,8 @@ namespace Azure.Communication.Rooms
         public DateTimeOffset? ValidFrom { get; set; }
         /// <summary> (Optional) The timestamp from when the room can no longer be joined. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`. </summary>
         public DateTimeOffset? ValidUntil { get; set; }
+        /// <summary> Flag to specify if the room is to be an open room or closed room. </summary>
+        public bool? RoomOpen { get; set; }
         /// <summary> Collection of room participants. </summary>
         public IList<RoomParticipantInternal> Participants { get; }
     }

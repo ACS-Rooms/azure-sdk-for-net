@@ -15,7 +15,7 @@ If any of the new objects needs to be overwritten, add the required changes to t
 title: Rooms
 model-namespace: false
 require:
-    -  https://raw.githubusercontent.com/Azure/azure-rest-api-specs/a48a244e0d1c27097659386ba6aeeeda3b7bebdb/specification/communication/data-plane/Rooms/readme.md
+    -  https://raw.githubusercontent.com/Azure/azure-rest-api-specs/e0ceb9c7d62d0ac289e9c4657cb273f189398bf9/specification/communication/data-plane/Rooms/readme.md
 payload-flattening-threshold: 10
 clear-output-folder: true
 generation1-convenience-client: true

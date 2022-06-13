@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Communication;
 using Azure.Core;
 
 namespace Azure.Communication.Rooms
@@ -28,13 +27,13 @@ namespace Azure.Communication.Rooms
 
         internal static RoomParticipantInternal DeserializeRoomParticipantInternal(JsonElement element)
         {
-            CommunicationIdentifierModel communicationIdentifier = default;
+            CommunicationIdentifier communicationIdentifier = default;
             Optional<string> role = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("communicationIdentifier"))
                 {
-                    communicationIdentifier = CommunicationIdentifierModel.DeserializeCommunicationIdentifierModel(property.Value);
+                    communicationIdentifier = CommunicationIdentifier.DeserializeCommunicationIdentifier(property.Value);
                     continue;
                 }
                 if (property.NameEquals("role"))

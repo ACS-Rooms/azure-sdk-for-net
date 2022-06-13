@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Communication;
 
 namespace Azure.Communication.Rooms
 {
@@ -16,7 +15,7 @@ namespace Azure.Communication.Rooms
         /// <summary> Initializes a new instance of RoomParticipantInternal. </summary>
         /// <param name="communicationIdentifier"> Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="communicationIdentifier"/> is null. </exception>
-        public RoomParticipantInternal(CommunicationIdentifierModel communicationIdentifier)
+        public RoomParticipantInternal(CommunicationIdentifier communicationIdentifier)
         {
             if (communicationIdentifier == null)
             {
@@ -29,14 +28,14 @@ namespace Azure.Communication.Rooms
         /// <summary> Initializes a new instance of RoomParticipantInternal. </summary>
         /// <param name="communicationIdentifier"> Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. </param>
         /// <param name="role"> Role Name. </param>
-        internal RoomParticipantInternal(CommunicationIdentifierModel communicationIdentifier, string role)
+        internal RoomParticipantInternal(CommunicationIdentifier communicationIdentifier, string role)
         {
             CommunicationIdentifier = communicationIdentifier;
             Role = role;
         }
 
         /// <summary> Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. </summary>
-        public CommunicationIdentifierModel CommunicationIdentifier { get; set; }
+        public CommunicationIdentifier CommunicationIdentifier { get; set; }
         /// <summary> Role Name. </summary>
         public string Role { get; set; }
     }

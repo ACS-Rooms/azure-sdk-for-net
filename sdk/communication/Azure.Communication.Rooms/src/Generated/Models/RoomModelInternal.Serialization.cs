@@ -20,6 +20,7 @@ namespace Azure.Communication.Rooms
             Optional<DateTimeOffset> createdDateTime = default;
             Optional<DateTimeOffset> validFrom = default;
             Optional<DateTimeOffset> validUntil = default;
+            Optional<bool> roomOpen = default;
             Optional<IReadOnlyList<RoomParticipantInternal>> participants = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -58,6 +59,16 @@ namespace Azure.Communication.Rooms
                     validUntil = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
+                if (property.NameEquals("roomOpen"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    roomOpen = property.Value.GetBoolean();
+                    continue;
+                }
                 if (property.NameEquals("participants"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -74,7 +85,7 @@ namespace Azure.Communication.Rooms
                     continue;
                 }
             }
-            return new RoomModelInternal(id.Value, Optional.ToNullable(createdDateTime), Optional.ToNullable(validFrom), Optional.ToNullable(validUntil), Optional.ToList(participants));
+            return new RoomModelInternal(id.Value, Optional.ToNullable(createdDateTime), Optional.ToNullable(validFrom), Optional.ToNullable(validUntil), Optional.ToNullable(roomOpen), Optional.ToList(participants));
         }
     }
 }

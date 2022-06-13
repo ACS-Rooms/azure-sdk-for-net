@@ -40,7 +40,7 @@ namespace Azure.Communication.Rooms
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
-        internal HttpMessage CreateCreateRoomRequest(Guid? repeatabilityRequestID, DateTimeOffset? repeatabilityFirstSent, DateTimeOffset? validFrom, DateTimeOffset? validUntil, IEnumerable<RoomParticipantInternal> participants)
+        internal HttpMessage CreateCreateRoomRequest(Guid? repeatabilityRequestID, DateTimeOffset? repeatabilityFirstSent, DateTimeOffset? validFrom, DateTimeOffset? validUntil, bool? roomOpen, IEnumerable<RoomParticipantInternal> participants)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -63,7 +63,8 @@ namespace Azure.Communication.Rooms
             CreateRoomRequest createRoomRequest = new CreateRoomRequest()
             {
                 ValidFrom = validFrom,
-                ValidUntil = validUntil
+                ValidUntil = validUntil,
+                RoomOpen = roomOpen
             };
             if (participants != null)
             {
@@ -84,11 +85,12 @@ namespace Azure.Communication.Rooms
         /// <param name="repeatabilityFirstSent"> If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date. </param>
         /// <param name="validFrom"> The timestamp from when the room is open for joining. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`. </param>
         /// <param name="validUntil"> The timestamp from when the room can no longer be joined. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`. </param>
+        /// <param name="roomOpen"> Flag to specify if the room is to be an open room or closed room. </param>
         /// <param name="participants"> (Optional) Collection of identities invited to the room. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<RoomModelInternal>> CreateRoomAsync(Guid? repeatabilityRequestID = null, DateTimeOffset? repeatabilityFirstSent = null, DateTimeOffset? validFrom = null, DateTimeOffset? validUntil = null, IEnumerable<RoomParticipantInternal> participants = null, CancellationToken cancellationToken = default)
+        public async Task<Response<RoomModelInternal>> CreateRoomAsync(Guid? repeatabilityRequestID = null, DateTimeOffset? repeatabilityFirstSent = null, DateTimeOffset? validFrom = null, DateTimeOffset? validUntil = null, bool? roomOpen = null, IEnumerable<RoomParticipantInternal> participants = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateCreateRoomRequest(repeatabilityRequestID, repeatabilityFirstSent, validFrom, validUntil, participants);
+            using var message = CreateCreateRoomRequest(repeatabilityRequestID, repeatabilityFirstSent, validFrom, validUntil, roomOpen, participants);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -109,11 +111,12 @@ namespace Azure.Communication.Rooms
         /// <param name="repeatabilityFirstSent"> If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date. </param>
         /// <param name="validFrom"> The timestamp from when the room is open for joining. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`. </param>
         /// <param name="validUntil"> The timestamp from when the room can no longer be joined. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`. </param>
+        /// <param name="roomOpen"> Flag to specify if the room is to be an open room or closed room. </param>
         /// <param name="participants"> (Optional) Collection of identities invited to the room. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<RoomModelInternal> CreateRoom(Guid? repeatabilityRequestID = null, DateTimeOffset? repeatabilityFirstSent = null, DateTimeOffset? validFrom = null, DateTimeOffset? validUntil = null, IEnumerable<RoomParticipantInternal> participants = null, CancellationToken cancellationToken = default)
+        public Response<RoomModelInternal> CreateRoom(Guid? repeatabilityRequestID = null, DateTimeOffset? repeatabilityFirstSent = null, DateTimeOffset? validFrom = null, DateTimeOffset? validUntil = null, bool? roomOpen = null, IEnumerable<RoomParticipantInternal> participants = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateCreateRoomRequest(repeatabilityRequestID, repeatabilityFirstSent, validFrom, validUntil, participants);
+            using var message = CreateCreateRoomRequest(repeatabilityRequestID, repeatabilityFirstSent, validFrom, validUntil, roomOpen, participants);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -198,7 +201,7 @@ namespace Azure.Communication.Rooms
             }
         }
 
-        internal HttpMessage CreateUpdateRoomRequest(string roomId, DateTimeOffset? validFrom, DateTimeOffset? validUntil, IEnumerable<RoomParticipantInternal> participants)
+        internal HttpMessage CreateUpdateRoomRequest(string roomId, DateTimeOffset? validFrom, DateTimeOffset? validUntil, bool? roomOpen, IEnumerable<RoomParticipantInternal> participants)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -214,7 +217,8 @@ namespace Azure.Communication.Rooms
             UpdateRoomRequest updateRoomRequest = new UpdateRoomRequest()
             {
                 ValidFrom = validFrom,
-                ValidUntil = validUntil
+                ValidUntil = validUntil,
+                RoomOpen = roomOpen
             };
             if (participants != null)
             {
@@ -234,17 +238,18 @@ namespace Azure.Communication.Rooms
         /// <param name="roomId"> The id of the room requested. </param>
         /// <param name="validFrom"> (Optional) The timestamp from when the room is open for joining. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`. </param>
         /// <param name="validUntil"> (Optional) The timestamp from when the room can no longer be joined. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`. </param>
+        /// <param name="roomOpen"> Flag to specify if the room is to be an open room or closed room. </param>
         /// <param name="participants"> Collection of room participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="roomId"/> is null. </exception>
-        public async Task<Response<RoomModelInternal>> UpdateRoomAsync(string roomId, DateTimeOffset? validFrom = null, DateTimeOffset? validUntil = null, IEnumerable<RoomParticipantInternal> participants = null, CancellationToken cancellationToken = default)
+        public async Task<Response<RoomModelInternal>> UpdateRoomAsync(string roomId, DateTimeOffset? validFrom = null, DateTimeOffset? validUntil = null, bool? roomOpen = null, IEnumerable<RoomParticipantInternal> participants = null, CancellationToken cancellationToken = default)
         {
             if (roomId == null)
             {
                 throw new ArgumentNullException(nameof(roomId));
             }
 
-            using var message = CreateUpdateRoomRequest(roomId, validFrom, validUntil, participants);
+            using var message = CreateUpdateRoomRequest(roomId, validFrom, validUntil, roomOpen, participants);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -264,17 +269,18 @@ namespace Azure.Communication.Rooms
         /// <param name="roomId"> The id of the room requested. </param>
         /// <param name="validFrom"> (Optional) The timestamp from when the room is open for joining. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`. </param>
         /// <param name="validUntil"> (Optional) The timestamp from when the room can no longer be joined. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`. </param>
+        /// <param name="roomOpen"> Flag to specify if the room is to be an open room or closed room. </param>
         /// <param name="participants"> Collection of room participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="roomId"/> is null. </exception>
-        public Response<RoomModelInternal> UpdateRoom(string roomId, DateTimeOffset? validFrom = null, DateTimeOffset? validUntil = null, IEnumerable<RoomParticipantInternal> participants = null, CancellationToken cancellationToken = default)
+        public Response<RoomModelInternal> UpdateRoom(string roomId, DateTimeOffset? validFrom = null, DateTimeOffset? validUntil = null, bool? roomOpen = null, IEnumerable<RoomParticipantInternal> participants = null, CancellationToken cancellationToken = default)
         {
             if (roomId == null)
             {
                 throw new ArgumentNullException(nameof(roomId));
             }
 
-            using var message = CreateUpdateRoomRequest(roomId, validFrom, validUntil, participants);
+            using var message = CreateUpdateRoomRequest(roomId, validFrom, validUntil, roomOpen, participants);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -428,7 +434,7 @@ namespace Azure.Communication.Rooms
             uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/rooms/", false);
             uri.AppendPath(roomId, true);
-            uri.AppendPath("/participants/:add", false);
+            uri.AppendPath("/participants:add", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -513,7 +519,7 @@ namespace Azure.Communication.Rooms
             uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/room/", false);
             uri.AppendPath(roomId, true);
-            uri.AppendPath("/participants/:update", false);
+            uri.AppendPath("/participants:update", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -598,7 +604,7 @@ namespace Azure.Communication.Rooms
             uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/rooms/", false);
             uri.AppendPath(roomId, true);
-            uri.AppendPath("/participants/:remove", false);
+            uri.AppendPath("/participants:remove", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
