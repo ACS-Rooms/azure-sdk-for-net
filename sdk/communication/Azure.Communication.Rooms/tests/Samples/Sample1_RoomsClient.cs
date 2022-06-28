@@ -30,7 +30,7 @@ namespace Azure.Communication.Rooms.Tests.samples
             var communicationUser2 = communicationIdentityClient.CreateUserAsync().Result.Value.Id;
 
             #region Snippet:Azure_Communication_Rooms_Tests_Samples_CreateRoomAsync
-            var validFrom = DateTime.Now;
+            var validFrom = new DateTime(2022, 12, 01, 00, 00, 00, DateTimeKind.Utc);
             var validUntil = validFrom.AddDays(1);
             var openRoom = false;
             List<RoomParticipant> createRoomParticipants = new List<RoomParticipant>();
@@ -80,7 +80,7 @@ namespace Azure.Communication.Rooms.Tests.samples
             var communicationUser2 = communicationIdentityClient.CreateUserAsync().Result.Value.Id;
             var communicationUser3 = communicationIdentityClient.CreateUserAsync().Result.Value.Id;
 
-            var validFrom = DateTime.Now;
+            var validFrom = new DateTime(2022, 12, 01, 00, 00, 00, DateTimeKind.Utc);
             var validUntil = validFrom.AddDays(1);
             var openRoom = false;
             List<RoomParticipant> createRoomParticipants = new List<RoomParticipant>();
@@ -116,7 +116,7 @@ namespace Azure.Communication.Rooms.Tests.samples
             var communicationUser1 = communicationIdentityClient.CreateUserAsync().Result.Value.Id;
             var communicationUser2 = communicationIdentityClient.CreateUserAsync().Result.Value.Id;
 
-            var validFrom = DateTime.Now;
+            var validFrom = new DateTime(2022, 12, 01, 00, 00, 00, DateTimeKind.Utc);
             var validUntil = validFrom.AddDays(1);
             var openRoom = false;
 
@@ -154,7 +154,7 @@ namespace Azure.Communication.Rooms.Tests.samples
             var communicationUser3 = communicationIdentityClient.CreateUserAsync().Result.Value.Id;
             var communicationUser4 = communicationIdentityClient.CreateUserAsync().Result.Value.Id;
 
-            var validFrom = DateTime.Now;
+            var validFrom = new DateTime(2022, 12, 01, 00, 00, 00, DateTimeKind.Utc);
             var validUntil = validFrom.AddDays(1);
             var openRoom = false;
             List<RoomParticipant> createRoomParticipants = new List<RoomParticipant>();
@@ -198,7 +198,7 @@ namespace Azure.Communication.Rooms.Tests.samples
                 CommunicationIdentityClient communicationIdentityClient = CreateInstrumentedCommunicationIdentityClient();
                 var communicationUser1 = communicationIdentityClient.CreateUserAsync().Result.Value.Id;
                 var communicationUser2 = communicationIdentityClient.CreateUserAsync().Result.Value.Id;
-                var validFrom = DateTime.Now;
+                var validFrom = new DateTime(2022, 12, 01, 00, 00, 00, DateTimeKind.Utc);
                 var validUntil = validFrom.AddDays(1);
                 var openRoom = false;
                 List<RoomParticipant> createRoomParticipants = new List<RoomParticipant>();
