@@ -25,10 +25,10 @@ namespace Azure.Communication.Rooms
                 writer.WritePropertyName("validUntil");
                 writer.WriteStringValue(ValidUntil.Value, "O");
             }
-            if (Optional.IsDefined(RoomOpen))
+            if (Optional.IsDefined(RoomJoinPolicy))
             {
-                writer.WritePropertyName("roomOpen");
-                writer.WriteBooleanValue(RoomOpen.Value);
+                writer.WritePropertyName("roomJoinPolicy");
+                writer.WriteStringValue(RoomJoinPolicy.Value.ToString());
             }
             if (Optional.IsCollectionDefined(Participants))
             {

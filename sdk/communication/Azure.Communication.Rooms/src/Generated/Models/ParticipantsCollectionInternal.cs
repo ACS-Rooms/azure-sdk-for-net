@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace Azure.Communication.Rooms
 {
-    /// <summary> Collection of participants who belong to a room. </summary>
+    /// <summary> Collection of participants in a room. </summary>
     internal partial class ParticipantsCollectionInternal
     {
         /// <summary> Initializes a new instance of ParticipantsCollectionInternal. </summary>
