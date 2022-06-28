@@ -26,7 +26,7 @@ namespace Azure.Communication.Rooms.Tests
             RoomsClient roomsClient = CreateInstrumentedRoomsClient(RoomsClientOptions.ServiceVersion.V2022_02_01_Preview);
             CommunicationIdentityClient communicationIdentityClient = CreateInstrumentedCommunicationIdentityClient();
 
-            var validFrom = DateTime.UtcNow;
+            var validFrom = new DateTime(2022, 12, 01, 00, 00, 00, DateTimeKind.Utc);
             var validUntil = validFrom.AddDays(1);
 
             try
@@ -84,7 +84,7 @@ namespace Azure.Communication.Rooms.Tests
             var communicationUser2 = communicationIdentityClient.CreateUserAsync().Result.Value.Id;
             var communicationUser3 = communicationIdentityClient.CreateUserAsync().Result.Value.Id;
 
-            var validFrom = DateTime.UtcNow;
+            var validFrom = new DateTime(2022, 12, 01, 00, 00, 00, DateTimeKind.Utc);
             var validUntil = validFrom.AddDays(1);
             var openRoom = false;
 
@@ -164,7 +164,7 @@ namespace Azure.Communication.Rooms.Tests
             RoomParticipant participant2 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), "Consumer");
             RoomParticipant participant3 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser3), "Attendee");
 
-            var validFrom = DateTime.UtcNow;
+            var validFrom = new DateTime(2022, 12, 01, 00, 00, 00, DateTimeKind.Utc);
             var validUntil = validFrom.AddDays(1);
             var openRoom = false;
 
@@ -233,7 +233,7 @@ namespace Azure.Communication.Rooms.Tests
             RoomParticipant participant4 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), "Consumer");
             RoomParticipant participant5 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), "Attendee");
 
-            var validFrom = DateTime.UtcNow;
+            var validFrom = new DateTime(2022, 12, 01, 00, 00, 00, DateTimeKind.Utc);
             var validUntil = validFrom.AddDays(1);
             var openRoom = false;
 
@@ -294,7 +294,7 @@ namespace Azure.Communication.Rooms.Tests
         {
             RoomsClient roomsClient = CreateInstrumentedRoomsClient(RoomsClientOptions.ServiceVersion.V2022_02_01_Preview);
 
-            var validFrom = DateTime.UtcNow;
+            var validFrom = new DateTime(2022, 12, 01, 00, 00, 00, DateTimeKind.Utc);
             var validUntil = validFrom.AddDays(1);
 
             try
