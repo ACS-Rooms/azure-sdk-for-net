@@ -447,54 +447,6 @@ namespace Azure.Communication.Rooms
         }
 
         /// <summary>
-        /// Remove Participants from a Room asynchronously
-        /// </summary>
-        /// <param name="roomId"></param>
-        /// <param name="participants"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
-        public virtual async Task<Response<RoomModel>> RemoveParticipantsAsync(string roomId, IEnumerable<RoomParticipant> participants = default, CancellationToken cancellationToken = default)
-        {
-            using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(RoomsClient)}.{nameof(RemoveParticipants)}");
-            scope.Start();
-            try
-            {
-                Response<RoomModelInternal> removeParticipantsResponseInternal =
-                    await RoomsServiceClient.RemoveParticipantsAsync(roomId, participants.Select(x => x.ToRoomParticipantInternal()), cancellationToken).ConfigureAwait(false);
-
-                return Response.FromValue(new RoomModel(removeParticipantsResponseInternal.Value), removeParticipantsResponseInternal.GetRawResponse());
-            }
-            catch (Exception ex)
-            {
-                scope.Failed(ex);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Remove Participants from a Room
-        /// </summary>
-        /// <param name="roomId"></param>
-        /// <param name="participants"></param>
-        /// <param name="cancellationToken"></param>
-        public virtual Response<RoomModel> RemoveParticipants(string roomId, IEnumerable<RoomParticipant> participants = default, CancellationToken cancellationToken = default)
-        {
-            using DiagnosticScope scope = _clientDiagnostics.CreateScope($"{nameof(RoomsClient)}.{nameof(RemoveParticipants)}");
-            scope.Start();
-            try
-            {
-                Response<RoomModelInternal> removeParticipantsResponseInternal =
-                     RoomsServiceClient.RemoveParticipants(roomId, participants.Select(x => x.ToRoomParticipantInternal()), cancellationToken);
-                return Response.FromValue(new RoomModel(removeParticipantsResponseInternal.Value), removeParticipantsResponseInternal.GetRawResponse());
-            }
-            catch (Exception ex)
-            {
-                scope.Failed(ex);
-                throw;
-            }
-        }
-
-        /// <summary>
         /// Remove room participants.
         /// </summary>
         /// <param name="roomId"></param>

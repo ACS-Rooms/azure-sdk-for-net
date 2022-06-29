@@ -27,8 +27,8 @@ namespace Azure.Communication.Rooms.Tests
             var communicationUser1 = new CommunicationUserIdentifier(mri1);
             var communicationUser2 = new CommunicationUserIdentifier(mri2);
 
-            var participant1 = new RoomParticipant(communicationUser1, "Presenter");
-            var participant2 = new RoomParticipant(communicationUser2, "Attendee");
+            var participant1 = new RoomParticipant(communicationUser1, RoleType.Presenter);
+            var participant2 = new RoomParticipant(communicationUser2, RoleType.Attendee);
 
             createRoomParticipants.Add(participant1);
             createRoomParticipants.Add(participant2);
@@ -56,8 +56,8 @@ namespace Azure.Communication.Rooms.Tests
             string communicationUser1 = "mockAcsUserIdentityString1";
             string communicationUser2 = "mockAcsUserIdentityString2";
 
-            createRoomParticipants.Add(new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), "Presenter"));
-            createRoomParticipants.Add(new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), "Attendee"));
+            createRoomParticipants.Add(new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), RoleType.Presenter));
+            createRoomParticipants.Add(new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), RoleType.Attendee));
             Response<RoomModel>? expectedRoomResult = new Mock<Response<RoomModel>>().Object;
             CancellationToken cancellationToken = new CancellationTokenSource().Token;
 
@@ -196,8 +196,8 @@ namespace Azure.Communication.Rooms.Tests
             var communicationUser1 = new CommunicationUserIdentifier(mri1);
             var communicationUser2 = new CommunicationUserIdentifier(mri2);
 
-            var participant1 = new RoomParticipant(communicationUser1, "Presenter");
-            var participant2 = new RoomParticipant(communicationUser2, "Attendee");
+            var participant1 = new RoomParticipant(communicationUser1, RoleType.Presenter);
+            var participant2 = new RoomParticipant(communicationUser2, RoleType.Attendee);
 
             participants.Add(participant1);
             participants.Add(participant2);
@@ -226,8 +226,8 @@ namespace Azure.Communication.Rooms.Tests
             string communicationUser1 = "mockAcsUserIdentityString1";
             string communicationUser2 = "mockAcsUserIdentityString2";
 
-            communicationUsers.Add(new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), "Presenter"));
-            communicationUsers.Add(new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), "Attendee"));
+            communicationUsers.Add(new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), RoleType.Presenter));
+            communicationUsers.Add(new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), RoleType.Attendee));
 
             Response<RoomModel>? expectedRoomResult = new Mock<Response<RoomModel>>().Object;
             CancellationToken cancellationToken = new CancellationTokenSource().Token;
@@ -251,8 +251,8 @@ namespace Azure.Communication.Rooms.Tests
             string communicationUser1 = "mockAcsUserIdentityString1";
             string communicationUser2 = "mockAcsUserIdentityString2";
 
-            communicationUsers.Add(new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), "Presenter"));
-            communicationUsers.Add(new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), "Attendee"));
+            communicationUsers.Add(new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), RoleType.Presenter));
+            communicationUsers.Add(new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), RoleType.Attendee));
 
             Response<RoomModel>? expectedRoomResult = new Mock<Response<RoomModel>>().Object;
             CancellationToken cancellationToken = new CancellationTokenSource().Token;
@@ -273,10 +273,10 @@ namespace Azure.Communication.Rooms.Tests
             Mock<RoomsClient> mockRoomsClient = new Mock<RoomsClient>();
             string roomId = "123";
 
-            List<RoomParticipant> communicationUsers = new List<RoomParticipant>();
-            communicationUsers.Add(new RoomParticipant(new CommunicationUserIdentifier("mockAcsUserIdentityString1")));
-            communicationUsers.Add(new RoomParticipant(new CommunicationUserIdentifier("mockAcsUserIdentityString2")));
-            communicationUsers.Add(new RoomParticipant(new CommunicationUserIdentifier("mockAcsUserIdentityString3")));
+            List<CommunicationIdentifier> communicationUsers = new List<CommunicationIdentifier>();
+            communicationUsers.Add(new CommunicationUserIdentifier("mockAcsUserIdentityString1"));
+            communicationUsers.Add(new CommunicationUserIdentifier("mockAcsUserIdentityString2"));
+            communicationUsers.Add((new CommunicationUserIdentifier("mockAcsUserIdentityString3")));
 
             Response<RoomModel>? expectedRoomResult = new Mock<Response<RoomModel>>().Object;
             CancellationToken cancellationToken = new CancellationTokenSource().Token;
