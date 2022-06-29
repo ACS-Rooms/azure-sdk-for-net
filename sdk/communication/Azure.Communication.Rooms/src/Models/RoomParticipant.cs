@@ -25,7 +25,7 @@ namespace Azure.Communication.Rooms
         /// <summary> Initializes a new instance of RoomParticipant. </summary>
         /// <param name="communicationIdentifier"> Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. </param>
         /// <param name="role"> Role Name. </param>
-        public RoomParticipant(CommunicationIdentifier communicationIdentifier, string role)
+        public RoomParticipant(CommunicationIdentifier communicationIdentifier, RoleType role)
         {
             CommunicationIdentifier = communicationIdentifier;
             Role = role;
@@ -34,13 +34,13 @@ namespace Azure.Communication.Rooms
         internal RoomParticipant(RoomParticipantInternal roomParticipantInternal)
         {
             CommunicationIdentifier = CommunicationIdentifierSerializer.Deserialize(roomParticipantInternal.CommunicationIdentifier);
-            Role = roomParticipantInternal.Role;
+            Role = (RoleType)roomParticipantInternal.Role;
         }
 
         /// <summary> Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. </summary>
         public CommunicationIdentifier CommunicationIdentifier { get; set; }
         /// <summary> Role Name. </summary>
-        public string Role { get; set; }
+        public RoleType? Role { get; set; }
 
         internal RoomParticipantInternal ToRoomParticipantInternal()
         {
