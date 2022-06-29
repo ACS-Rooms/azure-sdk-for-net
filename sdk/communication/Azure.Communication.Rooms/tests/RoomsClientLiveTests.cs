@@ -88,7 +88,7 @@ namespace Azure.Communication.Rooms.Tests
             try
             {
                 List<RoomParticipant> createRoomParticipants = new List<RoomParticipant>();
-                RoomParticipant participant1 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), "Presenter");
+                RoomParticipant participant1 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), RoleType.Presenter);
                 RoomParticipant participant2 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser2));
                 createRoomParticipants.Add(participant1);
                 createRoomParticipants.Add(participant2);
@@ -102,7 +102,7 @@ namespace Azure.Communication.Rooms.Tests
                 Assert.IsTrue(createRoomParticipantsResult.Any(x => x.CommunicationIdentifier.Equals(participant1.CommunicationIdentifier)), "Expected CreateRoom to contain user1");
                 Assert.IsTrue(createRoomParticipantsResult.Any(x => x.CommunicationIdentifier.Equals(participant2.CommunicationIdentifier)), "Expected CreateRoom to contain user2");
                 Assert.IsTrue(createRoomParticipantsResult.Any(x => x.Role == participant1.Role), "Expected CreateRoom to contain role1");
-                Assert.IsTrue(createRoomParticipantsResult.Any(x => x.Role == "Attendee"), "Expected CreateRoom to contain role2");
+                Assert.IsTrue(createRoomParticipantsResult.Any(x => x.Role == RoleType.Attendee), "Expected CreateRoom to contain role2");
 
                 var createdRoomId = createCommunicationRoom.Id;
 
@@ -115,11 +115,11 @@ namespace Azure.Communication.Rooms.Tests
                 Assert.IsTrue(getRoomParticipantsResult.Any(x => x.CommunicationIdentifier.Equals(participant1.CommunicationIdentifier)), "Expected GetRoom to contain user1");
                 Assert.IsTrue(getRoomParticipantsResult.Any(x => x.CommunicationIdentifier.Equals(participant2.CommunicationIdentifier)), "Expected GetRoom to contain user2");
                 Assert.IsTrue(getRoomParticipantsResult.Any(x => x.Role == participant1.Role), "Expected GetRoom to contain role1");
-                Assert.IsTrue(getRoomParticipantsResult.Any(x => x.Role == "Attendee"), "Expected GetRoom to contain role2");
+                Assert.IsTrue(getRoomParticipantsResult.Any(x => x.Role == RoleType.Attendee), "Expected GetRoom to contain role2");
 
                 // Update Room
                 List<RoomParticipant> updateRoomParticipants = new List<RoomParticipant>();
-                RoomParticipant participant3 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser3), "Presenter");
+                RoomParticipant participant3 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser3), RoleType.Presenter);
                 updateRoomParticipants.Add(participant3);
 
                 Response<RoomModel> updateRoomResponse = await roomsClient.UpdateRoomAsync(createdRoomId, validFrom, validUntil, RoomJoinPolicy.InviteOnly, updateRoomParticipants);
@@ -162,7 +162,7 @@ namespace Azure.Communication.Rooms.Tests
             try
             {
                 List<RoomParticipant> createRoomParticipants = new List<RoomParticipant>();
-                RoomParticipant participant1 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), "Presenter");
+                RoomParticipant participant1 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), RoleType.Presenter);
                 RoomParticipant participant2 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser2));
                 createRoomParticipants.Add(participant1);
                 createRoomParticipants.Add(participant2);
@@ -176,7 +176,7 @@ namespace Azure.Communication.Rooms.Tests
                 Assert.IsTrue(createRoomParticipantsResult.Any(x => x.CommunicationIdentifier.Equals(participant1.CommunicationIdentifier)), "Expected CreateRoom to contain user1");
                 Assert.IsTrue(createRoomParticipantsResult.Any(x => x.CommunicationIdentifier.Equals(participant2.CommunicationIdentifier)), "Expected CreateRoom to contain user2");
                 Assert.IsTrue(createRoomParticipantsResult.Any(x => x.Role == participant1.Role), "Expected CreateRoom to contain role1");
-                Assert.IsTrue(createRoomParticipantsResult.Any(x => x.Role == "Attendee"), "Expected CreateRoom to contain role2");
+                Assert.IsTrue(createRoomParticipantsResult.Any(x => x.Role == RoleType.Attendee), "Expected CreateRoom to contain role2");
 
                 var createdRoomId = createCommunicationRoom.Id;
 
@@ -223,9 +223,9 @@ namespace Azure.Communication.Rooms.Tests
 
             RoomsClient roomsClient = CreateInstrumentedRoomsClient(RoomsClientOptions.ServiceVersion.V2022_02_01_Preview);
 
-            RoomParticipant participant1 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), "Presenter");
-            RoomParticipant participant2 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), "Consumer");
-            RoomParticipant participant3 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser3), "Attendee");
+            RoomParticipant participant1 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), RoleType.Presenter);
+            RoomParticipant participant2 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), RoleType.Consumer);
+            RoomParticipant participant3 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser3), RoleType.Attendee);
 
             var validFrom = new DateTime(2022, 12, 01, 00, 00, 00, DateTimeKind.Utc);
             var validUntil = validFrom.AddDays(1);
@@ -290,10 +290,10 @@ namespace Azure.Communication.Rooms.Tests
 
             RoomsClient roomsClient = CreateInstrumentedRoomsClient(RoomsClientOptions.ServiceVersion.V2022_02_01_Preview);
 
-            RoomParticipant participant1 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), "Presenter");
-            RoomParticipant participant2 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), "Presenter");
-            RoomParticipant participant4 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), "Consumer");
-            RoomParticipant participant5 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), "Attendee");
+            RoomParticipant participant1 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), RoleType.Presenter);
+            RoomParticipant participant2 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), RoleType.Presenter);
+            RoomParticipant participant4 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), RoleType.Consumer);
+            RoomParticipant participant5 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), RoleType.Attendee);
 
             var validFrom = new DateTime(2022, 12, 01, 00, 00, 00, DateTimeKind.Utc);
             var validUntil = validFrom.AddDays(1);
