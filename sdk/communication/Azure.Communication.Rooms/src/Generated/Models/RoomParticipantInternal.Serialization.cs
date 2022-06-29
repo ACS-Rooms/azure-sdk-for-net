@@ -20,7 +20,7 @@ namespace Azure.Communication.Rooms
             if (Optional.IsDefined(Role))
             {
                 writer.WritePropertyName("role");
-                writer.WriteStringValue(Role);
+                writer.WriteStringValue(Role.Value.ToString());
             }
             writer.WriteEndObject();
         }
@@ -28,7 +28,7 @@ namespace Azure.Communication.Rooms
         internal static RoomParticipantInternal DeserializeRoomParticipantInternal(JsonElement element)
         {
             CommunicationIdentifierModel communicationIdentifier = default;
-            Optional<string> role = default;
+            Optional<RoleType> role = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("communicationIdentifier"))
@@ -38,11 +38,16 @@ namespace Azure.Communication.Rooms
                 }
                 if (property.NameEquals("role"))
                 {
-                    role = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    role = new RoleType(property.Value.GetString());
                     continue;
                 }
             }
-            return new RoomParticipantInternal(communicationIdentifier, role.Value);
+            return new RoomParticipantInternal(communicationIdentifier, Optional.ToNullable(role));
         }
     }
 }
