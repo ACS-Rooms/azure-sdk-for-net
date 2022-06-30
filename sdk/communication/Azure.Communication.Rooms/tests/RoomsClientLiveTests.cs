@@ -26,7 +26,7 @@ namespace Azure.Communication.Rooms.Tests
             RoomsClient roomsClient = CreateInstrumentedRoomsClient(RoomsClientOptions.ServiceVersion.V2022_02_01_Preview);
             CommunicationIdentityClient communicationIdentityClient = CreateInstrumentedCommunicationIdentityClient();
 
-            var validFrom = new DateTime(2022, 12, 01, 00, 00, 00, DateTimeKind.Utc);
+            var validFrom = DateTime.UtcNow;
             var validUntil = validFrom.AddDays(1);
 
             try
@@ -82,7 +82,7 @@ namespace Azure.Communication.Rooms.Tests
             var communicationUser2 = communicationIdentityClient.CreateUserAsync().Result.Value.Id;
             var communicationUser3 = communicationIdentityClient.CreateUserAsync().Result.Value.Id;
 
-            var validFrom = new DateTime(2022, 12, 01, 00, 00, 00, DateTimeKind.Utc);
+            var validFrom = DateTime.UtcNow;
             var validUntil = validFrom.AddDays(1);
 
             try
@@ -156,7 +156,7 @@ namespace Azure.Communication.Rooms.Tests
             var communicationUser1 = communicationIdentityClient.CreateUserAsync().Result.Value.Id;
             var communicationUser2 = communicationIdentityClient.CreateUserAsync().Result.Value.Id;
 
-            var validFrom = new DateTime(2022, 12, 01, 00, 00, 00, DateTimeKind.Utc);
+            var validFrom = DateTime.UtcNow;
             var validUntil = validFrom.AddDays(3);
 
             try
@@ -227,7 +227,7 @@ namespace Azure.Communication.Rooms.Tests
             RoomParticipant participant2 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), RoleType.Consumer);
             RoomParticipant participant3 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser3), RoleType.Attendee);
 
-            var validFrom = new DateTime(2022, 12, 01, 00, 00, 00, DateTimeKind.Utc);
+            var validFrom = DateTime.UtcNow;
             var validUntil = validFrom.AddDays(1);
 
             try
@@ -295,7 +295,7 @@ namespace Azure.Communication.Rooms.Tests
             RoomParticipant participant4 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), RoleType.Consumer);
             RoomParticipant participant5 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), RoleType.Attendee);
 
-            var validFrom = new DateTime(2022, 12, 01, 00, 00, 00, DateTimeKind.Utc);
+            var validFrom = DateTime.UtcNow;
             var validUntil = validFrom.AddDays(1);
 
             try
@@ -355,7 +355,7 @@ namespace Azure.Communication.Rooms.Tests
         {
             RoomsClient roomsClient = CreateInstrumentedRoomsClient(RoomsClientOptions.ServiceVersion.V2022_02_01_Preview);
 
-            var validFrom = new DateTime(2022, 12, 01, 00, 00, 00, DateTimeKind.Utc);
+            var validFrom = DateTime.UtcNow;
             var validUntil = validFrom.AddDays(1);
 
             try

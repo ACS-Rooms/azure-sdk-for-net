@@ -17,7 +17,7 @@ namespace Azure.Communication.Rooms.Tests
         public async Task CreateRoomAsyncShouldSucceed()
         {
             Mock<RoomsClient> mockRoomsClient = new Mock<RoomsClient>();
-            var validFrom = new DateTime(2022, 05, 01, 00, 00, 00, DateTimeKind.Utc);
+            var validFrom = DateTime.UtcNow;
             var validUntil = validFrom.AddDays(1);
 
             List<RoomParticipant> createRoomParticipants = new List<RoomParticipant>();
@@ -50,7 +50,7 @@ namespace Azure.Communication.Rooms.Tests
         public void CreateRoomShouldSucceed()
         {
             Mock<RoomsClient> mockRoomsClient = new Mock<RoomsClient>();
-            var validFrom = new DateTime(2022, 07, 01, 00, 00, 00, DateTimeKind.Utc);
+            var validFrom = DateTime.UtcNow;
             var validUntil = validFrom.AddDays(1);
             List<RoomParticipant> createRoomParticipants = new List<RoomParticipant>();
             string communicationUser1 = "mockAcsUserIdentityString1";
@@ -76,7 +76,7 @@ namespace Azure.Communication.Rooms.Tests
         {
             var roomId = "123";
             Mock<RoomsClient> mockRoomsClient = new Mock<RoomsClient>();
-            var validFrom = new DateTime(2022, 05, 01, 00, 00, 00, DateTimeKind.Utc);
+            var validFrom = DateTime.UtcNow;
             var validUntil = validFrom.AddDays(1);
             Response<RoomModel>? expectedRoomResult = default;
             CancellationToken cancellationToken = new CancellationTokenSource().Token;
@@ -96,7 +96,7 @@ namespace Azure.Communication.Rooms.Tests
         {
             Mock<RoomsClient> mockRoomsClient = new Mock<RoomsClient>();
             string roomId = "123";
-            var validFrom = new DateTime(2022, 05, 01, 00, 00, 00, DateTimeKind.Utc);
+            var validFrom = DateTime.UtcNow;
             var validUntil = validFrom.AddDays(1);
 
             Response<RoomModel>? expectedRoomResult = new Mock<Response<RoomModel>>().Object;
