@@ -107,11 +107,9 @@ namespace Azure.Communication.Rooms.Tests.samples
             List<RoomParticipant> toAddCommunicationUsers = new List<RoomParticipant>();
             toAddCommunicationUsers.Add(participant3);
 
-            Response<RoomModel> addParticipantResponse = await roomsClient.AddParticipantsAsync(createdRoomId, toAddCommunicationUsers);
-            RoomModel addedParticipantsRoom = addParticipantResponse.Value;
+            Response<ParticipantsCollection> addParticipantResponse = await roomsClient.AddParticipantsAsync(createdRoomId, toAddCommunicationUsers);
+            ParticipantsCollection addedParticipantsRoom = addParticipantResponse.Value;
             #endregion Snippet:Azure_Communication_Rooms_Tests_Samples_AddParticipants
-
-            Assert.IsFalse(string.IsNullOrWhiteSpace(addedParticipantsRoom.Id));
         }
 
         [Test]
@@ -142,11 +140,9 @@ namespace Azure.Communication.Rooms.Tests.samples
             List<CommunicationIdentifier> toRemoveCommunicationUsers = new List<CommunicationIdentifier>();
             toRemoveCommunicationUsers.Add(new CommunicationUserIdentifier(communicationUser2));
 
-            Response<RoomModel> removeParticipantResponse = await roomsClient.RemoveParticipantsAsync(createdRoomId, toRemoveCommunicationUsers);
-            RoomModel removeParticipantsRoom = removeParticipantResponse.Value;
+            Response<ParticipantsCollection> removeParticipantResponse = await roomsClient.RemoveParticipantsAsync(createdRoomId, toRemoveCommunicationUsers);
+            ParticipantsCollection removeParticipantsRoom = removeParticipantResponse.Value;
             #endregion Snippet:Azure_Communication_Rooms_Tests_Samples_RemoveParticipants
-
-            Assert.IsFalse(string.IsNullOrWhiteSpace(removeParticipantsRoom.Id));
         }
 
         [Test]
@@ -185,11 +181,9 @@ namespace Azure.Communication.Rooms.Tests.samples
             toUpdateCommunicationUsers.Add(participant3);
             toUpdateCommunicationUsers.Add(participant4);
 
-            Response<RoomModel> updateParticipantResponse = await roomsClient.UpdateParticipantsAsync(createdRoomId, toUpdateCommunicationUsers);
-            RoomModel updateParticipantsRoom = updateParticipantResponse.Value;
+            Response<ParticipantsCollection> updateParticipantResponse = await roomsClient.UpdateParticipantsAsync(createdRoomId, toUpdateCommunicationUsers);
+            ParticipantsCollection updateParticipantsRoom = updateParticipantResponse.Value;
             #endregion Snippet:Azure_Communication_Rooms_Tests_Samples_UpdateParticipants
-
-            Assert.IsFalse(string.IsNullOrWhiteSpace(updateParticipantsRoom.Id));
         }
 
         [Test]

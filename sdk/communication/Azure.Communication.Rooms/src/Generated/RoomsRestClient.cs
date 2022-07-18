@@ -451,7 +451,7 @@ namespace Azure.Communication.Rooms
         /// <param name="participants"> Participants to add to a room. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="roomId"/> or <paramref name="participants"/> is null. </exception>
-        public async Task<Response<RoomModelInternal>> AddParticipantsAsync(string roomId, IEnumerable<RoomParticipantInternal> participants, CancellationToken cancellationToken = default)
+        public async Task<Response<ParticipantsCollectionInternal>> AddParticipantsAsync(string roomId, IEnumerable<RoomParticipantInternal> participants, CancellationToken cancellationToken = default)
         {
             if (roomId == null)
             {
@@ -468,9 +468,9 @@ namespace Azure.Communication.Rooms
             {
                 case 200:
                     {
-                        RoomModelInternal value = default;
+                        ParticipantsCollectionInternal value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = RoomModelInternal.DeserializeRoomModelInternal(document.RootElement);
+                        value = ParticipantsCollectionInternal.DeserializeParticipantsCollectionInternal(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -483,7 +483,7 @@ namespace Azure.Communication.Rooms
         /// <param name="participants"> Participants to add to a room. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="roomId"/> or <paramref name="participants"/> is null. </exception>
-        public Response<RoomModelInternal> AddParticipants(string roomId, IEnumerable<RoomParticipantInternal> participants, CancellationToken cancellationToken = default)
+        public Response<ParticipantsCollectionInternal> AddParticipants(string roomId, IEnumerable<RoomParticipantInternal> participants, CancellationToken cancellationToken = default)
         {
             if (roomId == null)
             {
@@ -500,9 +500,9 @@ namespace Azure.Communication.Rooms
             {
                 case 200:
                     {
-                        RoomModelInternal value = default;
+                        ParticipantsCollectionInternal value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = RoomModelInternal.DeserializeRoomModelInternal(document.RootElement);
+                        value = ParticipantsCollectionInternal.DeserializeParticipantsCollectionInternal(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -536,7 +536,7 @@ namespace Azure.Communication.Rooms
         /// <param name="participants"> Participants to update in a room. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="roomId"/> or <paramref name="participants"/> is null. </exception>
-        public async Task<Response<RoomModelInternal>> UpdateParticipantsAsync(string roomId, IEnumerable<RoomParticipantInternal> participants, CancellationToken cancellationToken = default)
+        public async Task<Response<ParticipantsCollectionInternal>> UpdateParticipantsAsync(string roomId, IEnumerable<RoomParticipantInternal> participants, CancellationToken cancellationToken = default)
         {
             if (roomId == null)
             {
@@ -553,9 +553,9 @@ namespace Azure.Communication.Rooms
             {
                 case 200:
                     {
-                        RoomModelInternal value = default;
+                        ParticipantsCollectionInternal value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = RoomModelInternal.DeserializeRoomModelInternal(document.RootElement);
+                        value = ParticipantsCollectionInternal.DeserializeParticipantsCollectionInternal(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -568,7 +568,7 @@ namespace Azure.Communication.Rooms
         /// <param name="participants"> Participants to update in a room. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="roomId"/> or <paramref name="participants"/> is null. </exception>
-        public Response<RoomModelInternal> UpdateParticipants(string roomId, IEnumerable<RoomParticipantInternal> participants, CancellationToken cancellationToken = default)
+        public Response<ParticipantsCollectionInternal> UpdateParticipants(string roomId, IEnumerable<RoomParticipantInternal> participants, CancellationToken cancellationToken = default)
         {
             if (roomId == null)
             {
@@ -585,9 +585,9 @@ namespace Azure.Communication.Rooms
             {
                 case 200:
                     {
-                        RoomModelInternal value = default;
+                        ParticipantsCollectionInternal value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = RoomModelInternal.DeserializeRoomModelInternal(document.RootElement);
+                        value = ParticipantsCollectionInternal.DeserializeParticipantsCollectionInternal(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -621,7 +621,7 @@ namespace Azure.Communication.Rooms
         /// <param name="participants"> Participants to be removed from a room. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="roomId"/> or <paramref name="participants"/> is null. </exception>
-        public async Task<Response<RoomModelInternal>> RemoveParticipantsAsync(string roomId, IEnumerable<RoomParticipantInternal> participants, CancellationToken cancellationToken = default)
+        public async Task<Response<ParticipantsCollectionInternal>> RemoveParticipantsAsync(string roomId, IEnumerable<RoomParticipantInternal> participants, CancellationToken cancellationToken = default)
         {
             if (roomId == null)
             {
@@ -638,9 +638,9 @@ namespace Azure.Communication.Rooms
             {
                 case 200:
                     {
-                        RoomModelInternal value = default;
+                        ParticipantsCollectionInternal value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = RoomModelInternal.DeserializeRoomModelInternal(document.RootElement);
+                        value = ParticipantsCollectionInternal.DeserializeParticipantsCollectionInternal(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -653,7 +653,7 @@ namespace Azure.Communication.Rooms
         /// <param name="participants"> Participants to be removed from a room. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="roomId"/> or <paramref name="participants"/> is null. </exception>
-        public Response<RoomModelInternal> RemoveParticipants(string roomId, IEnumerable<RoomParticipantInternal> participants, CancellationToken cancellationToken = default)
+        public Response<ParticipantsCollectionInternal> RemoveParticipants(string roomId, IEnumerable<RoomParticipantInternal> participants, CancellationToken cancellationToken = default)
         {
             if (roomId == null)
             {
@@ -670,9 +670,9 @@ namespace Azure.Communication.Rooms
             {
                 case 200:
                     {
-                        RoomModelInternal value = default;
+                        ParticipantsCollectionInternal value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = RoomModelInternal.DeserializeRoomModelInternal(document.RootElement);
+                        value = ParticipantsCollectionInternal.DeserializeParticipantsCollectionInternal(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

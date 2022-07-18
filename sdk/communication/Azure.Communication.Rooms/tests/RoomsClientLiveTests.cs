@@ -250,10 +250,9 @@ namespace Azure.Communication.Rooms.Tests
                 toAddCommunicationUsers.Add(participant2);
                 toAddCommunicationUsers.Add(participant3);
 
-                Response<RoomModel> addParticipantsResponse = await roomsClient.AddParticipantsAsync(createdRoomId, toAddCommunicationUsers);
-                RoomModel addParticipantsRoom = addParticipantsResponse.Value;
-                List<RoomParticipant> addRoomParticipantsResult = addParticipantsRoom.Participants.ToList();
-                Assert.AreEqual(createdRoomId, addParticipantsRoom.Id);
+                Response<ParticipantsCollection> addParticipantsResponse = await roomsClient.AddParticipantsAsync(createdRoomId, toAddCommunicationUsers);
+                ParticipantsCollection roomParticipantsResponse = addParticipantsResponse.Value;
+                List<RoomParticipant> addRoomParticipantsResult = roomParticipantsResponse.Participants.ToList();
                 Assert.AreEqual(3, addRoomParticipantsResult.Count, "Expected Room participants count to be 3");
                 Assert.IsTrue(addRoomParticipantsResult.Any(x => x.CommunicationIdentifier.Equals(participant2.CommunicationIdentifier)), "Expected AddParticipants to contain user2");
                 Assert.IsTrue(addRoomParticipantsResult.Any(x => x.CommunicationIdentifier.Equals(participant3.CommunicationIdentifier)), "Expected AddParticipants to contain user3");
@@ -263,9 +262,8 @@ namespace Azure.Communication.Rooms.Tests
                 List<CommunicationIdentifier> toRemoveCommunicationUsers = new List<CommunicationIdentifier>();
                 toRemoveCommunicationUsers.Add(new CommunicationUserIdentifier(communicationUser2));
                 toRemoveCommunicationUsers.Add(new CommunicationUserIdentifier(communicationUser3));
-                Response<RoomModel> removeParticipantsResponse = await roomsClient.RemoveParticipantsAsync(createdRoomId, toRemoveCommunicationUsers);
-                RoomModel removeParticipantsRoom = removeParticipantsResponse.Value;
-                Assert.AreEqual(createdRoomId, removeParticipantsRoom.Id);
+                Response<ParticipantsCollection> removeParticipantsResponse = await roomsClient.RemoveParticipantsAsync(createdRoomId, toRemoveCommunicationUsers);
+                ParticipantsCollection removeRoomParticipantsResponse = removeParticipantsResponse.Value;
 
                 Response deleteRoomResponse = await roomsClient.DeleteRoomAsync(createdRoomId);
                 Assert.AreEqual(204, deleteRoomResponse.Status);
@@ -321,10 +319,9 @@ namespace Azure.Communication.Rooms.Tests
                 toUpdateCommunicationUsers.Add(participant4);
                 toUpdateCommunicationUsers.Add(participant5);
 
-                Response<RoomModel> updateParticipantsResponse = await roomsClient.UpdateParticipantsAsync(createdRoomId, toUpdateCommunicationUsers);
-                RoomModel updateParticipantsRoom = updateParticipantsResponse.Value;
+                Response<ParticipantsCollection> updateParticipantsResponse = await roomsClient.UpdateParticipantsAsync(createdRoomId, toUpdateCommunicationUsers);
+                ParticipantsCollection updateParticipantsRoom = updateParticipantsResponse.Value;
                 List<RoomParticipant> updateRoomParticipantsResult = updateParticipantsRoom.Participants.ToList();
-                Assert.AreEqual(createdRoomId, updateParticipantsRoom.Id);
                 Assert.AreEqual(2, updateRoomParticipantsResult.Count, 2);
                 Assert.IsTrue(updateRoomParticipantsResult.Any(x => x.CommunicationIdentifier.Equals(participant4.CommunicationIdentifier)), "Expected AddParticipants to contain user4");
                 Assert.IsTrue(updateRoomParticipantsResult.Any(x => x.CommunicationIdentifier.Equals(participant5.CommunicationIdentifier)), "Expected AddParticipants to contain user5");
