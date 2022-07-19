@@ -9,7 +9,7 @@ This package contains a C# SDK for the Rooms Service of Azure Communication Serv
 Install the Azure Communication Rooms client library for .NET with [NuGet][nuget]:
 
 ```PowerShell
-dotnet add package Azure.Communication.Rooms --version 1.0.1-alpha.1
+dotnet add package Azure.Communication.Rooms
 ``` 
 
 ### Prerequisites
@@ -46,8 +46,15 @@ A `RequestFailedException` is thrown as a service response for any unsuccessful 
 ```C# Snippet:Azure_Communication_RoomsClient_Tests_Troubleshooting
 try
 {
-    RoomRequest request = new RoomRequest();
-    Response<RoomModel> createRoomResponse = await roomsClient.CreateRoomAsync(request);
+    CommunicationIdentityClient communicationIdentityClient = CreateInstrumentedCommunicationIdentityClient();
+    var communicationUser1 = communicationIdentityClient.CreateUserAsync().Result.Value.Id;
+    var communicationUser2 = communicationIdentityClient.CreateUserAsync().Result.Value.Id;
+    var validFrom = DateTime.UtcNow;
+    var validUntil = validFrom.AddDays(1);
+    List<RoomParticipant> createRoomParticipants = new List<RoomParticipant>();
+    RoomParticipant participant1 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), RoleType.Presenter);
+    RoomParticipant participant2 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), RoleType.Attendee);
+    Response<RoomModel> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
     RoomModel createRoomResult = createRoomResponse.Value;
 }
 catch (RequestFailedException ex)

@@ -61,18 +61,14 @@ namespace Azure.Communication.Rooms.Tests.samples
             Assert.IsFalse(string.IsNullOrWhiteSpace(updateCommunicationRoom.Id));
 
             #region Snippet:Azure_Communication_Rooms_Tests_Samples_GetRoomAsync
-            Response<RoomModel> getRoomResponse = await roomsClient.GetRoomAsync(
-                //@@ createdRoomId: "existing room Id which is created already
-                createdRoomId);
+            Response<RoomModel> getRoomResponse = await roomsClient.GetRoomAsync(createdRoomId);
             RoomModel getCommunicationRoom = getRoomResponse.Value;
             #endregion Snippet:Azure_Communication_Rooms_Tests_Samples_GetRoomAsync
 
             Assert.IsFalse(string.IsNullOrWhiteSpace(getCommunicationRoom.Id));
 
             #region Snippet:Azure_Communication_Rooms_Tests_Samples_DeleteRoomAsync
-            Response deleteRoomResponse = await roomsClient.DeleteRoomAsync(
-                //@@ createdRoomId: "existing room Id which is created already
-                 createdRoomId);
+            Response deleteRoomResponse = await roomsClient.DeleteRoomAsync(createdRoomId);
             #endregion Snippet:Azure_Communication_Rooms_Tests_Samples_DeleteRoomAsync
 
             Assert.AreEqual(204, deleteRoomResponse.Status);
@@ -110,6 +106,11 @@ namespace Azure.Communication.Rooms.Tests.samples
             Response<ParticipantsCollection> addParticipantResponse = await roomsClient.AddParticipantsAsync(createdRoomId, toAddCommunicationUsers);
             ParticipantsCollection addedParticipantsRoom = addParticipantResponse.Value;
             #endregion Snippet:Azure_Communication_Rooms_Tests_Samples_AddParticipants
+
+            #region Snippet:Azure_Communication_Rooms_Tests_Samples_GetParticipants
+            Response<ParticipantsCollection> getParticipantResponse = await roomsClient.GetParticipantsAsync(createdRoomId);
+            ParticipantsCollection roomParticipants = getParticipantResponse.Value;
+            #endregion Snippet:Azure_Communication_Rooms_Tests_Samples_GetParticipants
         }
 
         [Test]
