@@ -46,10 +46,10 @@ namespace Azure.Communication.Rooms.Tests.samples
 
             var createdRoomId = createCommunicationRoom.Id;
 
-            #region Snippet:Azure_Communication_Rooms_Tests_Samples_CreateOpenRoomAsync_WithoutParticipants
+            #region Snippet:Azure_Communication_Rooms_Tests_Samples_CreateOpenRoomAsync
             Response<RoomModel> createOpenRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.CommunicationServiceUsers);
             RoomModel createCommunicationOpenRoom = createOpenRoomResponse.Value;
-            #endregion Snippet:Azure_Communication_Rooms_Tests_Samples_CreateOpenRoomAsync_WithoutParticipants
+            #endregion Snippet:Azure_Communication_Rooms_Tests_Samples_CreateOpenRoomAsync
 
             Assert.AreEqual(createCommunicationOpenRoom.RoomJoinPolicy, RoomJoinPolicy.CommunicationServiceUsers);
 
