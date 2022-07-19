@@ -58,20 +58,6 @@ namespace Azure.Communication.Rooms
                 Argument.CheckNotNull(keyCredential, nameof(keyCredential)),
                 options ?? new RoomsClientOptions())
         { }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RoomsClient"/> class.
-        /// </summary>
-        /// <param name="endpoint"></param>
-        /// <param name="tokenCredential"></param>
-        /// <param name="options"></param>
-        public RoomsClient(Uri endpoint, TokenCredential tokenCredential, RoomsClientOptions options = default)
-            : this(
-                Argument.CheckNotNull(endpoint, nameof(endpoint)).AbsoluteUri,
-                Argument.CheckNotNull(tokenCredential, nameof(tokenCredential)),
-                options ?? new RoomsClientOptions())
-        { }
-
         #endregion
 
         #region private constructors
