@@ -32,8 +32,8 @@ namespace Azure.Communication.Rooms.Tests
             try
             {
                 // Create Room
-                Response<RoomModel> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil);
-                RoomModel createCommunicationRoom = createRoomResponse.Value;
+                Response<CommunicationRoom> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil);
+                CommunicationRoom createCommunicationRoom = createRoomResponse.Value;
                 List<RoomParticipant> createRoomParticipantsResult = createCommunicationRoom.Participants.ToList();
                 Assert.IsFalse(string.IsNullOrWhiteSpace(createCommunicationRoom.Id));
                 Assert.AreEqual(0, createRoomParticipantsResult.Count, "Expected CreateRoom participants count to be 0");
@@ -41,8 +41,8 @@ namespace Azure.Communication.Rooms.Tests
                 var createdRoomId = createCommunicationRoom.Id;
 
                 // Get Room
-                Response<RoomModel> getRoomResponse = await roomsClient.GetRoomAsync(createdRoomId);
-                RoomModel getCommunicationRoom = getRoomResponse.Value;
+                Response<CommunicationRoom> getRoomResponse = await roomsClient.GetRoomAsync(createdRoomId);
+                CommunicationRoom getCommunicationRoom = getRoomResponse.Value;
                 List<RoomParticipant> getRoomParticipantsResult = getCommunicationRoom.Participants.ToList();
                 Assert.AreEqual(createdRoomId, getCommunicationRoom.Id);
                 Assert.AreEqual(0, getRoomParticipantsResult.Count, "Expected GetRoom participants count to be 0");
@@ -50,8 +50,8 @@ namespace Azure.Communication.Rooms.Tests
                 // Update Room
                 List<RoomParticipant> updateRoomParticipants = new List<RoomParticipant>();
 
-                Response<RoomModel> updateRoomResponse = await roomsClient.UpdateRoomAsync(createdRoomId, validFrom.AddDays(1), validUntil.AddDays(2), RoomJoinPolicy.InviteOnly, updateRoomParticipants);
-                RoomModel updateCommunicationRoom = updateRoomResponse.Value;
+                Response<CommunicationRoom> updateRoomResponse = await roomsClient.UpdateRoomAsync(createdRoomId, validFrom.AddDays(1), validUntil.AddDays(2), RoomJoinPolicy.InviteOnly, updateRoomParticipants);
+                CommunicationRoom updateCommunicationRoom = updateRoomResponse.Value;
                 List<RoomParticipant> updateRoomParticipantsResult = updateCommunicationRoom.Participants.ToList();
                 Assert.AreEqual(createdRoomId, updateCommunicationRoom.Id);
                 Assert.AreEqual(0, updateRoomParticipantsResult.Count, "Expected UpdateRoom participants count to be 0");
@@ -94,8 +94,8 @@ namespace Azure.Communication.Rooms.Tests
                 createRoomParticipants.Add(participant2);
 
                 // Create Room
-                Response<RoomModel> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
-                RoomModel createCommunicationRoom = createRoomResponse.Value;
+                Response<CommunicationRoom> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
+                CommunicationRoom createCommunicationRoom = createRoomResponse.Value;
                 List<RoomParticipant> createRoomParticipantsResult = createCommunicationRoom.Participants.ToList();
                 Assert.IsFalse(string.IsNullOrWhiteSpace(createCommunicationRoom.Id));
                 Assert.AreEqual(2, createRoomParticipantsResult.Count, "Expected CreateRoom participants count to be 2");
@@ -107,8 +107,8 @@ namespace Azure.Communication.Rooms.Tests
                 var createdRoomId = createCommunicationRoom.Id;
 
                 // Get Room
-                Response<RoomModel> getRoomResponse = await roomsClient.GetRoomAsync(createdRoomId);
-                RoomModel getCommunicationRoom = getRoomResponse.Value;
+                Response<CommunicationRoom> getRoomResponse = await roomsClient.GetRoomAsync(createdRoomId);
+                CommunicationRoom getCommunicationRoom = getRoomResponse.Value;
                 List<RoomParticipant> getRoomParticipantsResult = getCommunicationRoom.Participants.ToList();
                 Assert.AreEqual(createdRoomId, getCommunicationRoom.Id);
                 Assert.AreEqual(2, getRoomParticipantsResult.Count, "Expected GetRoom participants count to be 2");
@@ -122,8 +122,8 @@ namespace Azure.Communication.Rooms.Tests
                 RoomParticipant participant3 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser3), RoleType.Presenter);
                 updateRoomParticipants.Add(participant3);
 
-                Response<RoomModel> updateRoomResponse = await roomsClient.UpdateRoomAsync(createdRoomId, validFrom, validUntil, RoomJoinPolicy.InviteOnly, updateRoomParticipants);
-                RoomModel updateCommunicationRoom = updateRoomResponse.Value;
+                Response<CommunicationRoom> updateRoomResponse = await roomsClient.UpdateRoomAsync(createdRoomId, validFrom, validUntil, RoomJoinPolicy.InviteOnly, updateRoomParticipants);
+                CommunicationRoom updateCommunicationRoom = updateRoomResponse.Value;
                 List<RoomParticipant> updateRoomParticipantsResult = updateCommunicationRoom.Participants.ToList();
                 Assert.AreEqual(createdRoomId, updateCommunicationRoom.Id);
                 Assert.AreEqual(1, updateRoomParticipantsResult.Count, "Expected UpdateRoom participants count to be 1");
@@ -167,8 +167,8 @@ namespace Azure.Communication.Rooms.Tests
                 createRoomParticipants.Add(participant1);
                 createRoomParticipants.Add(participant2);
 
-                Response<RoomModel> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
-                RoomModel createCommunicationRoom = createRoomResponse.Value;
+                Response<CommunicationRoom> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
+                CommunicationRoom createCommunicationRoom = createRoomResponse.Value;
                 List<RoomParticipant> createRoomParticipantsResult = createCommunicationRoom.Participants.ToList();
                 Assert.IsFalse(string.IsNullOrWhiteSpace(createCommunicationRoom.Id));
                 Assert.AreEqual(createCommunicationRoom.RoomJoinPolicy, RoomJoinPolicy.InviteOnly);
@@ -180,8 +180,8 @@ namespace Azure.Communication.Rooms.Tests
 
                 var createdRoomId = createCommunicationRoom.Id;
 
-                Response<RoomModel> updateRoomResponse = await roomsClient.UpdateRoomAsync(createdRoomId, validFrom.AddDays(1), validUntil, RoomJoinPolicy.CommunicationServiceUsers);
-                RoomModel updateCommunicationRoom = updateRoomResponse.Value;
+                Response<CommunicationRoom> updateRoomResponse = await roomsClient.UpdateRoomAsync(createdRoomId, validFrom.AddDays(1), validUntil, RoomJoinPolicy.CommunicationServiceUsers);
+                CommunicationRoom updateCommunicationRoom = updateRoomResponse.Value;
                 List<RoomParticipant> updateRoomParticipantsResult = updateCommunicationRoom.Participants.ToList();
                 Assert.AreEqual(createdRoomId, updateCommunicationRoom.Id);
                 Assert.AreEqual(updateCommunicationRoom.RoomJoinPolicy, RoomJoinPolicy.CommunicationServiceUsers);
@@ -190,8 +190,8 @@ namespace Azure.Communication.Rooms.Tests
                 Assert.IsTrue(updateRoomParticipantsResult.Any(x => x.CommunicationIdentifier.Equals(participant2.CommunicationIdentifier)), "Expected UpdateRoom to contain user2");
                 Assert.AreEqual(updateCommunicationRoom.ValidUntil, updateCommunicationRoom.ValidUntil);
 
-                Response<RoomModel> getRoomResponse = await roomsClient.GetRoomAsync(createdRoomId);
-                RoomModel getCommunicationRoom = getRoomResponse.Value;
+                Response<CommunicationRoom> getRoomResponse = await roomsClient.GetRoomAsync(createdRoomId);
+                CommunicationRoom getCommunicationRoom = getRoomResponse.Value;
                 List<RoomParticipant> getRoomParticipantsResult = getCommunicationRoom.Participants.ToList();
                 Assert.AreEqual(createdRoomId, getCommunicationRoom.Id);
                 Assert.AreEqual(getCommunicationRoom.RoomJoinPolicy, RoomJoinPolicy.CommunicationServiceUsers);
@@ -235,8 +235,8 @@ namespace Azure.Communication.Rooms.Tests
                 List<RoomParticipant> createRoomParticipants = new List<RoomParticipant>();
                 createRoomParticipants.Add(participant1);
 
-                Response<RoomModel> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
-                RoomModel createCommunicationRoom = createRoomResponse.Value;
+                Response<CommunicationRoom> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
+                CommunicationRoom createCommunicationRoom = createRoomResponse.Value;
                 List<RoomParticipant> createRoomParticipantsResult = createCommunicationRoom.Participants.ToList();
 
                 Assert.IsFalse(string.IsNullOrWhiteSpace(createCommunicationRoom.Id));
@@ -250,8 +250,11 @@ namespace Azure.Communication.Rooms.Tests
                 toAddCommunicationUsers.Add(participant2);
                 toAddCommunicationUsers.Add(participant3);
 
-                Response<ParticipantsCollection> addParticipantsResponse = await roomsClient.AddParticipantsAsync(createdRoomId, toAddCommunicationUsers);
-                ParticipantsCollection roomParticipantsResponse = addParticipantsResponse.Value;
+                Response addParticipantsResponse = await roomsClient.AddParticipantsAsync(createdRoomId, toAddCommunicationUsers);
+                Assert.AreEqual(200, addParticipantsResponse.Status);
+                Response<ParticipantsCollection> getParticipantsResponse = await roomsClient.GetParticipantsAsync(createdRoomId);
+
+                ParticipantsCollection roomParticipantsResponse = getParticipantsResponse.Value;
                 List<RoomParticipant> addRoomParticipantsResult = roomParticipantsResponse.Participants.ToList();
                 Assert.AreEqual(3, addRoomParticipantsResult.Count, "Expected Room participants count to be 3");
                 Assert.IsTrue(addRoomParticipantsResult.Any(x => x.CommunicationIdentifier.Equals(participant2.CommunicationIdentifier)), "Expected AddParticipants to contain user2");
@@ -262,8 +265,8 @@ namespace Azure.Communication.Rooms.Tests
                 List<CommunicationIdentifier> toRemoveCommunicationUsers = new List<CommunicationIdentifier>();
                 toRemoveCommunicationUsers.Add(new CommunicationUserIdentifier(communicationUser2));
                 toRemoveCommunicationUsers.Add(new CommunicationUserIdentifier(communicationUser3));
-                Response<ParticipantsCollection> removeParticipantsResponse = await roomsClient.RemoveParticipantsAsync(createdRoomId, toRemoveCommunicationUsers);
-                ParticipantsCollection removeRoomParticipantsResponse = removeParticipantsResponse.Value;
+                Response removeParticipantsResponse = await roomsClient.RemoveParticipantsAsync(createdRoomId, toRemoveCommunicationUsers);
+                Assert.AreEqual(200, removeParticipantsResponse.Status);
 
                 Response deleteRoomResponse = await roomsClient.DeleteRoomAsync(createdRoomId);
                 Assert.AreEqual(204, deleteRoomResponse.Status);
@@ -302,8 +305,8 @@ namespace Azure.Communication.Rooms.Tests
                 createRoomParticipants.Add(participant1);
                 createRoomParticipants.Add(participant2);
 
-                Response<RoomModel> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
-                RoomModel createCommunicationRoom = createRoomResponse.Value;
+                Response<CommunicationRoom> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
+                CommunicationRoom createCommunicationRoom = createRoomResponse.Value;
                 List<RoomParticipant> createRoomParticipantsResult = createCommunicationRoom.Participants.ToList();
 
                 Assert.IsFalse(string.IsNullOrWhiteSpace(createCommunicationRoom.Id));
@@ -319,18 +322,16 @@ namespace Azure.Communication.Rooms.Tests
                 toUpdateCommunicationUsers.Add(participant4);
                 toUpdateCommunicationUsers.Add(participant5);
 
-                Response<ParticipantsCollection> updateParticipantsResponse = await roomsClient.UpdateParticipantsAsync(createdRoomId, toUpdateCommunicationUsers);
-                ParticipantsCollection updateParticipantsRoom = updateParticipantsResponse.Value;
+                Response updteParticipantsResponse = await roomsClient.UpdateParticipantsAsync(createdRoomId, toUpdateCommunicationUsers);
+                Assert.AreEqual(200, updteParticipantsResponse.Status);
+                Response<ParticipantsCollection> getParticipantsResponse = await roomsClient.GetParticipantsAsync(createdRoomId);
+                ParticipantsCollection updateParticipantsRoom = getParticipantsResponse.Value;
                 List<RoomParticipant> updateRoomParticipantsResult = updateParticipantsRoom.Participants.ToList();
                 Assert.AreEqual(2, updateRoomParticipantsResult.Count, 2);
                 Assert.IsTrue(updateRoomParticipantsResult.Any(x => x.CommunicationIdentifier.Equals(participant4.CommunicationIdentifier)), "Expected AddParticipants to contain user4");
                 Assert.IsTrue(updateRoomParticipantsResult.Any(x => x.CommunicationIdentifier.Equals(participant5.CommunicationIdentifier)), "Expected AddParticipants to contain user5");
                 Assert.IsTrue(updateRoomParticipantsResult.Any(x => x.Role == participant4.Role), "Expected AddParticipants to contain role4");
                 Assert.IsTrue(updateRoomParticipantsResult.Any(x => x.Role == participant5.Role), "Expected AddParticipants to contain role5");
-
-                // Get Room Participants
-                Response<ParticipantsCollection> getParticipantsResponse = await roomsClient.GetParticipantsAsync(createdRoomId);
-                Assert.AreEqual(getParticipantsResponse.Value.Participants.ToList().Count, 2);
 
                 // Delete room
                 Response deleteRoomResponse = await roomsClient.DeleteRoomAsync(createdRoomId);
@@ -357,15 +358,15 @@ namespace Azure.Communication.Rooms.Tests
 
             try
             {
-                Response<RoomModel> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom);
-                RoomModel createCommunicationRoom = createRoomResponse.Value;
+                Response<CommunicationRoom> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom);
+                CommunicationRoom createCommunicationRoom = createRoomResponse.Value;
                 Assert.IsFalse(string.IsNullOrWhiteSpace(createCommunicationRoom.Id));
                 Assert.AreEqual(validFrom, createCommunicationRoom.ValidFrom?.UtcDateTime);
 
                 var createdRoomId = createCommunicationRoom.Id;
 
-                Response<RoomModel> updateRoomResponse = await roomsClient.UpdateRoomAsync(createdRoomId, validFrom, validUntil);
-                RoomModel updateCommunicationRoom = updateRoomResponse.Value;
+                Response<CommunicationRoom> updateRoomResponse = await roomsClient.UpdateRoomAsync(createdRoomId, validFrom, validUntil);
+                CommunicationRoom updateCommunicationRoom = updateRoomResponse.Value;
                 Assert.AreEqual(createdRoomId, updateCommunicationRoom.Id);
                 Assert.AreEqual(validFrom, updateCommunicationRoom.ValidFrom?.UtcDateTime);
                 Assert.AreEqual(validUntil, updateCommunicationRoom.ValidUntil?.UtcDateTime);
