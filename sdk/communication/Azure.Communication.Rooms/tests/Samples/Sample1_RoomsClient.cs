@@ -37,8 +37,8 @@ namespace Azure.Communication.Rooms.Tests.samples
             RoomParticipant participant2 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), RoleType.Attendee);
             createRoomParticipants.Add(participant1);
             createRoomParticipants.Add(participant2);
-            Response<RoomModel> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
-            RoomModel createCommunicationRoom = createRoomResponse.Value;
+            Response<CommunicationRoom> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
+            CommunicationRoom createCommunicationRoom = createRoomResponse.Value;
 
             #endregion Snippet:Azure_Communication_Rooms_Tests_Samples_CreateRoomAsync
 
@@ -47,24 +47,24 @@ namespace Azure.Communication.Rooms.Tests.samples
             var createdRoomId = createCommunicationRoom.Id;
 
             #region Snippet:Azure_Communication_Rooms_Tests_Samples_CreateOpenRoomAsync
-            Response<RoomModel> createOpenRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.CommunicationServiceUsers);
-            RoomModel createCommunicationOpenRoom = createOpenRoomResponse.Value;
+            Response<CommunicationRoom> createOpenRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.CommunicationServiceUsers);
+            CommunicationRoom createCommunicationOpenRoom = createOpenRoomResponse.Value;
             #endregion Snippet:Azure_Communication_Rooms_Tests_Samples_CreateOpenRoomAsync
 
             Assert.AreEqual(createCommunicationOpenRoom.RoomJoinPolicy, RoomJoinPolicy.CommunicationServiceUsers);
 
             #region Snippet:Azure_Communication_Rooms_Tests_Samples_UpdateRoomAsync
-            Response<RoomModel> updateRoomResponse = await roomsClient.UpdateRoomAsync(createdRoomId, validFrom, validUntil);
-            RoomModel updateCommunicationRoom = updateRoomResponse.Value;
+            Response<CommunicationRoom> updateRoomResponse = await roomsClient.UpdateRoomAsync(createdRoomId, validFrom, validUntil);
+            CommunicationRoom updateCommunicationRoom = updateRoomResponse.Value;
             #endregion Snippet:Azure_Communication_Rooms_Tests_Samples_UpdateRoomAsync
 
             Assert.IsFalse(string.IsNullOrWhiteSpace(updateCommunicationRoom.Id));
 
             #region Snippet:Azure_Communication_Rooms_Tests_Samples_GetRoomAsync
-            Response<RoomModel> getRoomResponse = await roomsClient.GetRoomAsync(
+            Response<CommunicationRoom> getRoomResponse = await roomsClient.GetRoomAsync(
                 //@@ createdRoomId: "existing room Id which is created already
                 createdRoomId);
-            RoomModel getCommunicationRoom = getRoomResponse.Value;
+            CommunicationRoom getCommunicationRoom = getRoomResponse.Value;
             #endregion Snippet:Azure_Communication_Rooms_Tests_Samples_GetRoomAsync
 
             Assert.IsFalse(string.IsNullOrWhiteSpace(getCommunicationRoom.Id));
@@ -96,8 +96,8 @@ namespace Azure.Communication.Rooms.Tests.samples
             createRoomParticipants.Add(participant1);
             createRoomParticipants.Add(participant2);
 
-            Response<RoomModel> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
-            RoomModel createCommunicationRoom = createRoomResponse.Value;
+            Response<CommunicationRoom> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
+            CommunicationRoom createCommunicationRoom = createRoomResponse.Value;
 
             Assert.IsFalse(string.IsNullOrWhiteSpace(createCommunicationRoom.Id));
 
@@ -107,8 +107,7 @@ namespace Azure.Communication.Rooms.Tests.samples
             List<RoomParticipant> toAddCommunicationUsers = new List<RoomParticipant>();
             toAddCommunicationUsers.Add(participant3);
 
-            Response<ParticipantsCollection> addParticipantResponse = await roomsClient.AddParticipantsAsync(createdRoomId, toAddCommunicationUsers);
-            ParticipantsCollection addedParticipantsRoom = addParticipantResponse.Value;
+            Response addParticipantResponse = await roomsClient.AddParticipantsAsync(createdRoomId, toAddCommunicationUsers);
             #endregion Snippet:Azure_Communication_Rooms_Tests_Samples_AddParticipants
         }
 
@@ -129,8 +128,8 @@ namespace Azure.Communication.Rooms.Tests.samples
             createRoomParticipants.Add(participant1);
             createRoomParticipants.Add(participant2);
 
-            Response<RoomModel> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
-            RoomModel createCommunicationRoom = createRoomResponse.Value;
+            Response<CommunicationRoom> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
+            CommunicationRoom createCommunicationRoom = createRoomResponse.Value;
 
             Assert.IsFalse(string.IsNullOrWhiteSpace(createCommunicationRoom.Id));
 
@@ -140,8 +139,7 @@ namespace Azure.Communication.Rooms.Tests.samples
             List<CommunicationIdentifier> toRemoveCommunicationUsers = new List<CommunicationIdentifier>();
             toRemoveCommunicationUsers.Add(new CommunicationUserIdentifier(communicationUser2));
 
-            Response<ParticipantsCollection> removeParticipantResponse = await roomsClient.RemoveParticipantsAsync(createdRoomId, toRemoveCommunicationUsers);
-            ParticipantsCollection removeParticipantsRoom = removeParticipantResponse.Value;
+            Response removeParticipantResponse = await roomsClient.RemoveParticipantsAsync(createdRoomId, toRemoveCommunicationUsers);
             #endregion Snippet:Azure_Communication_Rooms_Tests_Samples_RemoveParticipants
         }
 
@@ -167,8 +165,8 @@ namespace Azure.Communication.Rooms.Tests.samples
             createRoomParticipants.Add(participant3);
             createRoomParticipants.Add(participant4);
 
-            Response<RoomModel> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
-            RoomModel createCommunicationRoom = createRoomResponse.Value;
+            Response<CommunicationRoom> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
+            CommunicationRoom createCommunicationRoom = createRoomResponse.Value;
 
             Assert.IsFalse(string.IsNullOrWhiteSpace(createCommunicationRoom.Id));
 
@@ -181,8 +179,7 @@ namespace Azure.Communication.Rooms.Tests.samples
             toUpdateCommunicationUsers.Add(participant3);
             toUpdateCommunicationUsers.Add(participant4);
 
-            Response<ParticipantsCollection> updateParticipantResponse = await roomsClient.UpdateParticipantsAsync(createdRoomId, toUpdateCommunicationUsers);
-            ParticipantsCollection updateParticipantsRoom = updateParticipantResponse.Value;
+            Response updateParticipantResponse = await roomsClient.UpdateParticipantsAsync(createdRoomId, toUpdateCommunicationUsers);
             #endregion Snippet:Azure_Communication_Rooms_Tests_Samples_UpdateParticipants
         }
 
@@ -201,8 +198,8 @@ namespace Azure.Communication.Rooms.Tests.samples
                 List<RoomParticipant> createRoomParticipants = new List<RoomParticipant>();
                 RoomParticipant participant1 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser1), RoleType.Presenter);
                 RoomParticipant participant2 = new RoomParticipant(new CommunicationUserIdentifier(communicationUser2), RoleType.Attendee);
-                Response<RoomModel> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
-                RoomModel createRoomResult = createRoomResponse.Value;
+                Response<CommunicationRoom> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, RoomJoinPolicy.InviteOnly, createRoomParticipants);
+                CommunicationRoom createRoomResult = createRoomResponse.Value;
             }
             catch (RequestFailedException ex)
             {
